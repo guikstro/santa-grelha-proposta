@@ -107,3 +107,23 @@ svg.ic{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .canhoto.solta{transform:translateY(16px) rotate(-4deg)}
 .canhoto span{font-size:10px;text-transform:uppercase;color:var(--cafe)}
 .canhoto b{font:24px var(--mao);color:var(--caneta);font-weight:400}
+
+/* triagem da reserva: uma pergunta por vez, a comanda em cima guarda as respostas */
+button.linha{width:100%;text-align:left;cursor:pointer}
+button.linha:disabled{cursor:default}
+button.linha:not(:disabled):hover small{color:var(--sg)}
+.rv-etapa{margin-top:26px;animation:rvEntra .4s var(--ease)}
+@keyframes rvEntra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rv-n{color:var(--nogueira)}
+.rv-q{font-size:clamp(36px,3.6vw,50px);line-height:.95;letter-spacing:-.01em;margin-top:8px}
+.rv-d{margin-top:8px}
+.rv-etapa .fichas{margin-top:20px}
+.rv-etapa .fichas .btn{min-height:48px;min-width:56px}
+.rv-opcoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.rv-opcao{text-align:left;padding:20px;border:1px solid var(--pedra);border-radius:3px;transition:border-color .4s var(--ease),background .4s var(--ease)}
+.rv-opcao:hover,.rv-opcao[aria-pressed=true]{border-color:var(--onix);background:#fffdf9}
+.rv-opcao:disabled{opacity:.35;cursor:not-allowed}
+.rv-opcao b{display:block;font:400 32px/1 var(--serif);text-transform:uppercase}
+.rv-opcao small{display:block;font:22px/1.1 var(--mao);color:var(--caneta);margin-top:8px}
+.rv-opcao span{display:block;font-size:13px;color:var(--cafe);margin-top:6px}
+@media (max-width:520px){.rv-opcoes{grid-template-columns:1fr}}

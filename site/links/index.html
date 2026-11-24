@@ -139,9 +139,9 @@
     <div class="st on"><img src="../fotos/tradicao.jpg" alt="Salão do Santa Grelha com as mesas postas" style="object-position:50% 80%">
       <div class="txt"><div class="meta"><span data-t="s1a">Grelhados em Fortaleza</span><span data-t="s1b">Desde 2000</span></div><h2 data-t="s1h">Duas casas, uma brasa.</h2><button type="button" class="etiqueta" data-abre="reserva"><span data-t="res">Reservar mesa</span><span aria-hidden="true">→</span></button></div></div>
     <div class="st"><img src="../fotos/picanha.jpg" alt="Picanha do Santa Grelha" loading="lazy">
-      <div class="txt"><div class="meta"><span data-t="s2a">Para compartilhar</span><span>R$ 185</span></div><h2>Picanha.</h2><button type="button" class="etiqueta" data-prato="0"><small data-t="naMesa">Na mesa</small><span data-t="s2e">Servida em fatias</span><span aria-hidden="true">→</span></button></div></div>
+      <div class="txt"><div class="meta"><span data-t="s2a">Para compartilhar</span><span>R$ 185</span></div><h2>Picanha.</h2><button type="button" class="etiqueta" data-prato="0"><span data-t="s2e">Servida em fatias</span><span aria-hidden="true">→</span></button></div></div>
     <div class="st"><img src="../fotos/polvo.jpg" alt="Polvo glaceado na brasa" loading="lazy">
-      <div class="txt"><div class="meta"><span data-t="s3a">Do mar</span><span>R$ 114</span></div><h2 data-t="s3h">Polvo na brasa.</h2><button type="button" class="etiqueta" data-prato="1"><small data-t="naMesa">Na mesa</small><span data-t="s3e">Glaceado na brasa</span><span aria-hidden="true">→</span></button></div></div>
+      <div class="txt"><div class="meta"><span data-t="s3a">Do mar</span><span>R$ 114</span></div><h2 data-t="s3h">Polvo na brasa.</h2><button type="button" class="etiqueta" data-prato="1"><span data-t="s3e">Glaceado na brasa</span><span aria-hidden="true">→</span></button></div></div>
     <div class="st"><video id="vid" autoplay muted loop playsinline preload="metadata" poster="../fotos/abertura.jpg" aria-label="A varanda do Santa Grelha"><source src="../fotos/abertura.mp4" type="video/mp4"></video>
       <div class="txt"><div class="meta"><span data-t="s4a">A varanda</span><span data-t="s4b">Eventos</span></div><h2 data-t="s4h">Para a sua data.</h2><a class="etiqueta" data-zap-evento href="#" target="_blank" rel="noopener"><span data-t="s4e">Falar com eventos</span><span aria-hidden="true">→</span></a></div></div>
     <button type="button" class="toque e" data-ir="-1" aria-label="Destaque anterior"></button><button type="button" class="toque d" data-ir="1" aria-label="Próximo destaque"></button>
@@ -205,7 +205,7 @@ const PRATOS=[
  {f:'burger',n:['Wagyu burger','Wagyu sliders'],s:['Entrada','Starter'],d:['Mini burgers de wagyu com queijo brie e picles.','Mini wagyu burgers with brie and pickles.'],p:49},
  {f:'executivo',n:['Menu executivo','Lunch menu'],s:['Segunda a quinta','Monday to Thursday'],d:['Entrada, prato e sobremesa. Pratos e horário a confirmar com a casa.','Starter, main and dessert. Dishes and hours to be confirmed by the restaurant.'],p:79}];
 const CARTA=[['Tira de chorizo','Chorizo strips',239],['Costela Angus','Angus short rib',170],['Fraldinha','Flank steak',165],['Maminha','Tri-tip',145]];
-const EN={s1a:'Grilled in Fortaleza',s1b:'Since 2000',s1h:'Two houses, one fire.',res:'Book a table',s2a:'To share',naMesa:'At the table',s2e:'Served sliced',s3a:'From the sea',s3h:'Octopus on the fire.',s3e:'Glazed over the fire',s4a:'The deck',s4b:'Events',s4h:'For your date.',s4e:'Talk to events',
+const EN={s1a:'Grilled in Fortaleza',s1b:'Since 2000',s1h:'Two houses, one fire.',res:'Book a table',s2a:'To share',s2e:'Served sliced',s3a:'From the sea',s3h:'Octopus on the fire.',s3e:'Glazed over the fire',s4a:'The deck',s4b:'Events',s4h:'For your date.',s4e:'Talk to events',
  qual:'Which house?',eR:'Monday to Thursday',eT:'Lunch menu',eL:'Starter, main<br>and dessert',a1:'Menu',a2:'iFood delivery',a3:'Events',gT:'From the grill',gV:'Menu',hT:'Can’t decide?',hL:'Tell us how many and how hungry. The house replies on WhatsApp.',chegar:'Directions',site:'Website'};
 const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
@@ -215,7 +215,7 @@ const CH=MARCA.id+'-casa';
 let casa=(()=>{try{return localStorage.getItem(CH)}catch(e){return null}})();if(!unidade(casa))casa=MARCA.unidades[0].id;
 const est=u=>{const s=estadoUnidade(u);return s.k==='aberta'?L(`aberta até ${hm(s.ate)}`,`open until ${hm(s.ate)}`):s.k==='fechada'?L(`abre amanhã, ${hm(s.abre)}`,`opens tomorrow, ${hm(s.abre)}`):L(`abre às ${hm(s.abre)}`,`opens at ${hm(s.abre)}`);};
 const CIRC='<svg class="circulo" viewBox="0 0 168 88" aria-hidden="true"><path d="M30 20 C60 4 128 2 152 22 C170 38 160 70 120 82 C82 92 26 86 10 62 C-2 44 14 24 44 14"/></svg>';
-const reserva=Reserva.monta(document.getElementById('reserva-corpo'),{casa,origem:'link da bio'});
+const reserva=Reserva.monta(document.getElementById('reserva-corpo'),{casa,origem:'link da bio',aoTrocarCasa:c=>{casa=c;try{localStorage.setItem(CH,c)}catch(e){}pinta();}});
 
 function pinta(){
   const u=unidade(casa),{d}=agoraFortaleza();
