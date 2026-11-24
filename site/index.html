@@ -6,12 +6,14 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Santa Grelha, grelhados premium em Fortaleza desde 2000. Duas casas: Meireles e Iguatemi.">
 <title>Santa Grelha · protótipo</title>
+<!-- Dados conferidos em 24/11/2026 (Tripadvisor, Linktree, bio do Instagram). WhatsApp fica de fora até a casa confirmar. -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Restaurant", "name": "Santa Grelha Meireles", "servesCuisine": ["Churrascaria", "Grelhados"], "telephone": "+55 85 3224-0249", "address": {"@type": "PostalAddress", "streetAddress": "R. Tibúrcio Cavalcante, 790, Meireles", "addressLocality": "Fortaleza", "addressRegion": "CE", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday"], "opens": "11:30", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday", "Friday", "Saturday"], "opens": "11:30", "closes": "23:00"}]}, {"@type": "Restaurant", "name": "Santa Grelha Iguatemi", "servesCuisine": ["Churrascaria", "Grelhados"], "telephone": "+55 85 3241-5541", "address": {"@type": "PostalAddress", "streetAddress": "Av. Washington Soares, 85, loja 779, Shopping Iguatemi", "addressLocality": "Fortaleza", "addressRegion": "CE", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "11:30", "closes": "22:00"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Santa Grelha: branco de toalha, tinta escura e o vermelho do monograma SG. Bodoni (o SG é Didone) e Raleway (a do site deles). */
-:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#9C9292;--sg:#C4161C;--sg-escuro:#8E0E13;--regra:#DDD5D0;
+:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#7A7070;--sg:#C4161C;--sg-escuro:#8E0E13;--regra:#DDD5D0;
   --serif:'Bodoni Moda',Didot,'Bodoni 72',serif;--sans:'Raleway',system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -63,8 +65,14 @@ section{padding:96px 0}
 .grupo .nota{font-size:14px;color:var(--tinta-2);margin-top:10px;max-width:28ch}
 .itens{columns:2 300px;column-gap:44px}
 .item{break-inside:avoid;padding:0 0 18px}
+.item .linha{display:flex;align-items:baseline;gap:8px}
 .item .n{font-family:var(--serif);font-size:21px;line-height:1.25}
-.item .p{font-family:var(--serif);color:var(--sg);margin-left:8px;font-size:19px;white-space:nowrap}
+.item .p{font-family:var(--serif);color:var(--sg);margin-left:auto;padding-left:10px;font-size:19px;white-space:nowrap}
+.item .p.sem{font:500 13px var(--sans);color:var(--tinta-2)}
+.item .alg{font-size:13px;color:var(--tinta-2);margin:1px 0 2px}
+.item .alg.pend{font-style:italic}
+.conf{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--sg-escuro);border-bottom:1px solid currentColor}
+.aviso-alerg{margin-top:28px;font-size:15px;color:var(--tinta);font-weight:500}
 .item .d{font-size:15px;color:var(--tinta-2);line-height:1.5}
 .antes{display:none}
 body.revisao .antes{display:block;font-size:13px;color:var(--sg);text-decoration:line-through}
@@ -113,14 +121,14 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-
 <body>
 <div class="demo" data-t="demo">Protótipo feito pela Timeless para o Santa Grelha. Não é o site oficial da casa.</div>
 <div class="topo">
-  <img src="https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png" alt="Santa Grelha">
+  <img src="https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png" alt="Santa Grelha" width="74" height="54">
   <nav aria-label="Seções">
     <a href="#cardapio" data-t="n1">Cardápio</a>
     <a href="#casas" data-t="n2">As casas</a>
     <a href="#eventos" data-t="n3">Eventos</a>
     <a href="reservar/" data-t="n4">Reservar</a>
   </nav>
-  <button class="lang" type="button" id="lang">EN</button>
+  <button class="lang" type="button" id="lang" aria-label="Ver em inglês">EN</button>
 </div>
 
 <div class="faixa"><div class="wrap">
@@ -134,11 +142,12 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-
     <div class="wrap">
       <div class="cab">
         <h2 data-t="cardT">O cardápio</h2>
-        <p data-t="cardL">Do cardápio digital da casa, com os preços de 24/11/2026. Na brasa sagrada desde a primeira casa da Tibúrcio Cavalcante.</p>
+        <p data-t="cardL">Cardápio do Iguatemi, copiado do cardápio digital da casa com os preços de 24/11/2026. O do Meireles pode variar. Desde 2000, na brasa.</p>
         <div class="siglas"><span data-t="sigT">Siglas de alergênico que a casa usa:</span><span><b>LE</b>, <b>CO</b>, <b>CR</b></span><span data-t="sigL">A legenda entra quando a casa enviar. Hoje ela não aparece no cardápio.</span></div>
       </div>
       <div class="indice" id="indice"></div>
       <div id="lista"></div>
+      <p class="aviso-alerg" data-t="avisoAlerg">Para alergias, avise a equipe ao pedir.</p>
     </div>
   </section>
 
@@ -146,7 +155,7 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-
     <div class="wrap grade">
       <div class="cab">
         <h2 data-t="evT">Comemorar no Santa Grelha</h2>
-        <p data-t="evL">Aniversário, jantar de empresa ou confraternização, na varanda do Meireles ou no Iguatemi. O pedido chega pronto para a equipe da casa escolhida.</p>
+        <p data-t="evL">Aniversário, casamento, jantar de empresa ou confraternização, na varanda do Meireles ou no Iguatemi. O pedido chega pronto para a equipe da casa escolhida.</p>
       </div>
       <form id="form-ev" novalidate>
         <label class="full"><span data-t="fCasa">Casa</span><select name="casa" id="ev-casa"></select></label>
@@ -163,7 +172,7 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-
 
   <section class="casas" id="casas">
     <div class="wrap">
-      <div class="cab"><h2 data-t="casasT">As casas</h2><p data-t="casasL">Horário de cada uma, igual no site, no Google, no Instagram e no Tripadvisor.</p></div>
+      <div class="cab"><h2 data-t="casasT">As casas</h2><p data-t="casasL">Horário de cada casa de Fortaleza, conferido no Tripadvisor e no Linktree em 24/11/2026.</p></div>
       <div class="grade" id="lista-casas"></div>
     </div>
   </section>
@@ -171,7 +180,7 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-
 <footer>
   <span>Santa Grelha, do Grupo Social Clube</span>
   <span><a href="links/">Link da bio</a> &nbsp; <a href="../painel/" data-t="painelL">Painel da equipe</a></span>
-  <span data-t="rodape">Protótipo da Timeless. Fotos do site do Grupo Social Clube; horários do Tripadvisor em 24/11/2026.</span>
+  <span data-t="rodape">Protótipo da Timeless. Fotos do site do Grupo Social Clube; horários do Tripadvisor e do Linktree em 24/11/2026.</span>
 </footer>
 <div class="ferr"><button type="button" id="b-revisao" aria-pressed="false">Ver o que corrigimos</button></div>
 
@@ -180,40 +189,44 @@ footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-
 <script src="cardapio.js"></script>
 <script>
 const EN={demo:'Prototype made by Timeless for Santa Grelha. Not the restaurant’s official website.',n1:'Menu',n2:'Our houses',n3:'Events',n4:'Book',
- h1:'Two houses, one fire.',desde:'Premium grills in Fortaleza since 2000',cardT:'The menu',cardL:'From the restaurant’s digital menu, prices as of 24 Nov 2026. Cooked over the same fire since the first house on Tibúrcio Cavalcante.',
+ h1:'Two houses, one fire.',desde:'Premium grills in Fortaleza since 2000',cardT:'The menu',cardL:'The Iguatemi menu, copied from the restaurant’s digital menu with prices as of 24 Nov 2026. Meireles may differ. Over the fire since 2000.',avisoAlerg:'For allergies, tell the team when you order.',
  sigT:'Allergen codes the restaurant uses:',sigL:'The legend will be added when the restaurant sends it. Today it does not appear on the menu.',
- evT:'Celebrate at Santa Grelha',evL:'Birthdays, team dinners and celebrations, on the Meireles terrace or at Iguatemi. The request reaches the team of the house you choose.',
+ evT:'Celebrate at Santa Grelha',evL:'Birthdays, weddings, team dinners and celebrations, on the Meireles terrace or at Iguatemi. The request reaches the team of the house you choose.',
  fCasa:'House',fNome:'Your name',fData:'Date',fPessoas:'Guests',fTipo:'Occasion',fObs:'Anything else?',fEnviar:'Build the request',
- casasT:'Our houses',casasL:'Each one’s hours, the same on the website, Google, Instagram and Tripadvisor.',painelL:'Team panel',
- rodape:'Timeless prototype. Photos from the Grupo Social Clube website; hours from Tripadvisor, 24 Nov 2026.'};
+ casasT:'Our houses',casasL:'Hours of each Fortaleza house, checked on Tripadvisor and Linktree on 24 Nov 2026.',painelL:'Team panel',
+ rodape:'Timeless prototype. Photos from the Grupo Social Clube website; hours from Tripadvisor and Linktree, 24 Nov 2026.'};
 const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
 const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+const ALG={gluten:['glúten','gluten'],trigo:['trigo','wheat'],lactose:['lactose','lactose'],leite:['leite','milk'],peixe:['peixe','fish'],amendoas:['amêndoas','almonds'],corantes:['corantes','colourings'],castanhas:['castanhas','tree nuts'],soja:['soja','soy'],ovo:['ovo','egg'],crustaceos:['crustáceos','shellfish']};
+const alg=i=>(i.alerg||[]).length?`<div class="alg">${L('Alergênicos','Allergens')}: ${i.alerg.map(a=>L(...ALG[a])).join(', ')}</div>`:`<div class="alg pend">${L('Alergênicos: confirmar com a casa','Allergens: to be confirmed by the restaurant')}</div>`;
+const preco=p=>p==null?`<span class="p sem">${L('preço com a casa','price on request')}</span>`:`<span class="p">${brl(p)}</span>`;
+const conf=g=>g.confirmar?`<p class="conf">${L('A confirmar com a casa','To be confirmed by the restaurant')}</p>`:'';
 
 function portas(){
   document.getElementById('portas').innerHTML=MARCA.unidades.map(u=>{
     const s=estadoUnidade(u), on=s.k==='aberta';
     const txt=on?L(`Aberta agora, até ${hm(s.ate)}`,`Open now, until ${hm(s.ate)}`):s.k==='fechada'?L(`Fechada agora. Abre amanhã às ${hm(s.abre)}`,`Closed now. Opens tomorrow at ${hm(s.abre)}`):L(`Abre hoje às ${hm(s.abre)}`,`Opens today at ${hm(s.abre)}`);
-    return `<div class="porta" style="background-image:url(${u.foto})" role="group" aria-label="${u.nome}">
+    return `<div class="porta" style="background-image:url(${u.foto})" role="group" aria-label="${L('Santa Grelha '+u.nome+', foto da casa','Santa Grelha '+u.nome+', photo of the restaurant')}">
       <div class="placa"><h2>${u.nome}</h2><div class="end">${u.end}</div>
       <div class="agora ${on?'':'off'}"><i aria-hidden="true"></i>${txt}</div>
-      <div class="trip">Tripadvisor <b>${u.trip[0]}</b>, ${L(u.trip[1]+' avaliações',u.trip[1].replace('.',',')+' reviews')}, ${L(u.trip[2],u.trip[2].replace('nº','#').replace('de','of').replace('em','in'))}</div>
+      <div class="trip">Tripadvisor <b>${L(u.trip[0],u.trip[3])}</b>, ${L(u.trip[1]+' avaliações',u.trip[4]+' reviews')}, ${L(u.trip[2],u.trip[5])}</div>
       <a class="ir" href="reservar/?casa=${u.id}" data-evt="Reservar ${u.nome}">${L('Reservar no '+u.nome,'Book at '+u.nome)}</a></div></div>`;}).join('');
 }
 function cardapio(){
   document.getElementById('indice').innerHTML=CARDAPIO.map((g,k)=>`<a href="#g${k}">${lang==='en'?g.en:g.cat}</a>`).join('');
-  document.getElementById('lista').innerHTML=CARDAPIO.map((g,k)=>`<div class="grupo" id="g${k}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="nota">${lang==='en'?'The restaurant does not yet state the weight or how many people each cut serves.':g.nota}</p>`:''}</div>
-    <div class="itens">${g.itens.map(i=>`<div class="item ${i.c.length?'':'sem-sigla'}"><div><span class="n">${lang==='en'?i.en[0]:i.n}</span><span class="p">${brl(i.p)}</span>${i.c.map(c=>`<span class="sigla" title="${L('sigla de alergênico','allergen code')}">${c}</span>`).join('')}</div>
-    <div class="d">${lang==='en'?i.en[1]:i.d}</div>${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`).join('')}</div></div>`).join('');
+  document.getElementById('lista').innerHTML=CARDAPIO.map((g,k)=>`<div class="grupo" id="g${k}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="nota">${lang==='en'?(g.notaEn||'The restaurant does not yet state the weight or how many people each cut serves.'):g.nota}</p>`:''}${conf(g)}</div>
+    <div class="itens">${g.itens.map(i=>`<div class="item ${i.c.length?'':'sem-sigla'}"><div class="linha"><span class="n">${lang==='en'?i.en[0]:i.n}${i.c.map(c=>`<span class="sigla" title="${L('sigla de alergênico que a casa usa','allergen code used by the restaurant')}">${c}</span>`).join('')}</span>${preco(i.p)}</div>
+    ${alg(i)}<div class="d">${lang==='en'?i.en[1]:i.d}</div>${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`).join('')}</div></div>`).join('');
 }
 function casas(){
   const {d}=agoraFortaleza();
   document.getElementById('lista-casas').innerHTML=MARCA.unidades.map(u=>`<div><h3>${u.nome}</h3><p class="end">${u.end}</p>
     <ul class="horas">${[0,1,2,3,4,5,6].map(k=>`<li class="${k===d?'hoje':''}"><span>${lang==='en'?DAYS[k]:DIAS[k][0].toUpperCase()+DIAS[k].slice(1)}${k===d?L(' (hoje)',' (today)'):''}</span><span>${u.hor[k].map(([a,b])=>hm(a)+L(' às ','–')+hm(b)).join(', ')}</span></li>`).join('')}</ul>
-    <div class="links"><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="reservar/?casa=${u.id}">${L('Reservar','Book')}</a></div></div>`).join('');
+    <div class="links"><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="reservar/?casa=${u.id}">${L('Reservar','Book')}</a>${u.tel?`<a href="tel:+55${u.tel.replace(/\D/g,'')}">${L('Ligar','Call')} ${u.tel}</a>`:''}</div></div>`).join('');
   document.getElementById('ev-casa').innerHTML=MARCA.unidades.map(u=>`<option value="${u.id}">${u.nome}</option>`).join('');
 }
 function tudo(){portas();cardapio();casas();}
-function aplicaLang(){document.getElementById('lang').textContent=lang==='en'?'PT':'EN';document.documentElement.lang=lang==='en'?'en':'pt-BR';
+function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');document.documentElement.lang=lang==='en'?'en':'pt-BR';
   document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});tudo();}
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
 document.getElementById('form-ev').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target),u=unidade(f.get('casa'));
