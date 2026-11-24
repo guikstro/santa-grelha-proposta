@@ -140,7 +140,7 @@ p + p{margin-top:12px}
   .capa{min-height:297mm;break-after:page} .capa .base{width:62%}
   .caminho{grid-template-columns:repeat(4,1fr)} .vivo{grid-template-columns:auto 1fr} .site .vivo{grid-template-columns:1fr 1fr}
   .tela{height:470px} .tela iframe{transform:scale(.48)}
-  .mock{display:none} .ad{grid-template-columns:1fr 1fr;margin-top:10px;gap:10px} .ad .cel{height:330px;width:230px} .ad .cel iframe{transform:scale(.56)} .ad figcaption{font-size:15px}
+  .mock{display:none} .ad{grid-template-columns:1fr 1fr;margin-top:10px;gap:10px} .ad .cel{height:300px;width:220px} .ad .cel iframe{transform:scale(.56)} .ad figcaption{font-size:15px}
   .troca{margin-top:14px} .troca div{grid-template-columns:1fr 1fr;gap:20px;padding:6px 0;font-size:12px} .troca div:first-child{display:grid} .troca span::before{content:none!important}
   h3{font-size:38px;margin-bottom:14px} .folha .texto.mut{font-size:14px}
   .achado{padding:11px 0;gap:24px;grid-template-columns:1fr 2.2fr} .achado b{font-size:18px} .achado p{font-size:13px;line-height:1.5}
@@ -197,11 +197,15 @@ p + p{margin-top:12px}
 
 <section class="folha">
   <h2>Primeiro acompanhamento</h2>
-  <h3>O link da bio</h3>
-  <div class="vivo">
-    <div class="cel"><iframe src="site/links/" title="Protótipo do link da bio" loading="lazy"></iframe></div>
-    <div><ul class="notas"><li><b>As duas casas, com o estado de agora</b><span>“Aberta até 22h” ou “Abre às 11h30”, para Meireles e Iguatemi.</span></li><li><b>Um botão principal: reservar</b><span>O cliente escolhe a casa num toque e reserva. Cardápio, iFood, eventos e endereços vêm logo abaixo.</span></li><li><b>O endereço certo</b><span>O Meireles volta para a Tibúrcio Cavalcante, não para o Oregon.</span></li><li><b>Sem página de terceiros</b><span>Sai o Linktree, entra o endereço do Santa Grelha.</span></li></ul><a class="abrir" href="site/links/">Abrir o link da bio</a></div>
+  <h3>O link da bio, hoje e na proposta</h3>
+  <p class="texto mut">Quem toca no link da bio do Instagram cai aqui. Hoje são 18 botões iguais, divididos em dois blocos. Na proposta, a página abre com o vídeo da varanda, a pessoa escolhe a casa num toque e reserva ali mesmo, numa comanda escrita à mão.</p>
+  <figure class="mock"><img src="assets/como-fica.jpg" alt="A bio nova do Santa Grelha aberta num celular sobre a toalha branca" loading="lazy"><figcaption>Como fica no celular de quem chega pelo Instagram. Cena ilustrativa, gerada por imagem; a tela é o protótipo real.</figcaption></figure>
+  <div class="ad">
+    <figure><figcaption>Hoje, no Linktree<small>print de 24/11/2026, role dentro do celular</small></figcaption><div class="cel cel-img"><div class="rola" tabindex="0" aria-label="Print do Linktree atual"><img src="assets/linktree-hoje.jpg" alt="Linktree atual do Santa Grelha: dezoito botões iguais, sete repetidos para cada casa"></div></div></figure>
+    <figure><figcaption>Proposta<small>funciona: toque e role</small></figcaption><div class="cel"><iframe src="site/links/" title="Protótipo do link da bio"></iframe></div></figure>
   </div>
+  <div class="troca"><div><span>Hoje</span><span>Na proposta</span></div><div><span>Dezoito botões iguais, sete repetidos para cada casa.</span><span>Meireles e Iguatemi numa comanda só, cada uma dizendo se está aberta agora.</span></div><div><span>O botão de localização do Meireles aponta para Salem, nos Estados Unidos.</span><span>Endereço, horário da semana e “Como chegar” da casa escolhida, com o mapa certo.</span></div><div><span>Nenhum prato e nenhum preço.</span><span>Picanha, polvo e wagyu burger com as fotos do Instagram da casa, e os cortes para compartilhar com preço.</span></div><div><span>O Menu Executivo só aparece nos posts do Instagram.</span><span>O executivo de segunda a quinta, R$ 79, tem lugar próprio na página.</span></div><div><span>A reserva abre em outro site, um por casa.</span><span>A reserva acontece na própria bio: casa, dia, hora e pessoas, carimbada no fim, com o canhoto para a agenda.</span></div><div><span>“Crie seu Linktree” no rodapé, propaganda de outra empresa.</span><span>Rodapé limpo, com o nome do grupo.</span></div></div>
+  <a class="abrir" href="site/links/">Abrir o link da bio</a>
 </section>
 
 <section class="folha site">
