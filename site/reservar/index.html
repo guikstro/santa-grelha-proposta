@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#9C9292;--acento:#C4161C;--acento-txt:#fff;--regra:#DDD5D0;
+:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#7A7070;--acento:#C4161C;--acento-txt:#fff;--regra:#DDD5D0;
   --serif:'Bodoni Moda',Didot,serif;--sans:'Raleway',system-ui,sans-serif;--peso-titulo:400;--borda:2px;--raio:0;--logo-filtro:invert(1);--logo-blend:multiply}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--fundo);color:var(--tinta);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
@@ -108,13 +108,12 @@ dl.resumo dd{text-align:right;font-weight:500}
       <section class="etapa" data-e="dia"><h2></h2><p class="dica"></p><div class="opcoes" id="o-dia"></div></section>
       <section class="etapa" data-e="hora"><h2></h2><p class="dica"></p><div class="opcoes" id="o-hora"></div></section>
       <section class="etapa" data-e="pessoas"><h2></h2><p class="dica"></p><div class="opcoes" id="o-pessoas"></div><p class="aviso" id="a-pessoas"></p></section>
-      <section class="etapa" data-e="ocasiao"><h2></h2><p class="dica"></p><div class="opcoes largas" id="o-ocasiao"></div></section>
-      <section class="etapa" data-e="pedidos"><h2></h2><p class="dica"></p><div class="marcas" id="o-pedidos"></div>
+      <section class="etapa" data-e="pedidos"><h2></h2><p class="dica"></p><div class="turno" id="t-ocasiao"></div><div class="opcoes largas" id="o-ocasiao"></div><div class="turno" id="t-pedidos" style="margin-top:22px"></div><div class="marcas" id="o-pedidos"></div>
         <div class="campos"><label class="full"><span id="l-obs"></span><input id="i-obs" maxlength="140"></label></div></section>
       <section class="etapa" data-e="contato"><h2></h2><p class="dica"></p>
         <div class="campos">
           <label><span id="l-nome"></span><input id="i-nome" autocomplete="name"></label>
-          <label><span>WhatsApp</span><input id="i-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000"></label>
+          <label><span>WhatsApp (celular)</span><input id="i-zap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 9 0000-0000" aria-describedby="e-zap"></label>
         </div><p class="erro" id="e-zap"></p></section>
       <section class="etapa" data-e="revisar"><h2></h2><p class="dica"></p><dl class="resumo" id="resumo"></dl></section>
       <section class="etapa" data-e="enviando"><h2></h2><ul class="checando" id="checando"></ul></section>
@@ -130,9 +129,14 @@ dl.resumo dd{text-align:right;font-weight:500}
 <script>
 // Reserva em passos com triagem. Primeiro a casa; cada resposta filtra a próxima.
 // Comum sai confirmada na hora; grupo grande ou pedido especial vai para a equipe confirmar no painel.
-const ETAPAS=['casa','dia','hora','pessoas','ocasiao','pedidos','contato','revisar','enviando'];
-const R={e:0,casa:null,dia:null,hora:null,pessoas:null,ocasiao:null,pedidos:[],obs:'',nome:'',zap:''};
-const pre=new URLSearchParams(location.search).get('casa'); if(pre&&unidade(pre)){R.casa=pre;R.e=1;}
+const ETAPAS=['casa','dia','hora','pessoas','pedidos','contato','revisar','enviando'];
+// Pré-seleção: 2 pessoas; a casa da última visita (ou a do link); hoje, se ainda houver horário.
+const R={e:0,casa:null,dia:null,hora:null,pessoas:2,ocasiao:null,pedidos:[],obs:'',nome:'',zap:''};
+const Q=new URLSearchParams(location.search),CH=MARCA.id+'-casa';
+const MESA=(Q.get('mesa')||'').slice(0,300); // mesa sugerida pelo "monte a sua mesa", quando houver
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pre=Q.get('casa'); if(pre&&unidade(pre)){R.casa=pre;R.e=1;}
+else{try{const ult=localStorage.getItem(CH);if(unidade(ult))R.casa=ult;}catch(e){}}
 const OCASIOES=[['casal','Jantar a dois','Dinner for two'],['familia','Família','Family'],['amigos','Amigos','Friends'],['negocios','Negócios','Business'],['aniversario','Aniversário','Birthday'],['outra','Outra','Other']];
 const PEDIDOS=MARCA.pedidos||[['crianca','Cadeira para criança','High chair'],['acesso','Acesso sem degraus','Step-free access'],['tranquila','Mesa mais tranquila','A quieter table']];
 const nomeDe=(l,k)=>{const o=l.find(x=>x[0]===k);return o?(lang==='en'?o[2]:o[1]):'';};
@@ -141,61 +145,64 @@ function dias(){const {d}=agoraFortaleza(),h=new Date(new Date().toLocaleString(
 const fmtDia=x=>`${lang==='en'?DAYS[x.wd]:DIAS[x.wd]}, ${x.dt.getDate()}/${x.dt.getMonth()+1}`;
 function horas(x){const {m}=agoraFortaleza(),out=[];U().hor[x.wd].forEach(([a,b])=>{for(let t=a;t<=b-60;t+=30){if(x.k===0&&t<m+30)continue;out.push(t);}});return out;}
 function motivos(){const m=[];if(R.pessoas>=6)m.push(L(`grupo de ${R.pessoas}`,`group of ${R.pessoas}`));R.pedidos.forEach(k=>m.push(nomeDe(PEDIDOS,k).toLowerCase()));if(R.obs.trim())m.push(L('observação','note'));return m;}
-const zapOk=()=>R.zap.replace(/\D/g,'').length>=10;
+// WhatsApp: celular com DDD, 11 dígitos, o terceiro é 9 (aceita o 55 na frente)
+const zapOk=()=>{const d=R.zap.replace(/\D/g,'').replace(/^55(?=\d{11}$)/,'');return d.length===11&&d[2]==='9';};
+const diaPadrao=()=>{if(R.casa&&R.dia===null&&horas(dias()[0]).length)R.dia=0;};
 const TXT={
  casa:[()=>L('Em qual casa?','Which restaurant?'),()=>L('Cada casa tem o seu horário. Mostramos se está aberta agora.','Each one has its own hours. We show which is open now.')],
  dia:[()=>L('Para que dia?','Which day?'),()=>L(`${MARCA.nome} ${U().nome}. Hoje só aparece se ainda houver horário.`,`${MARCA.nome} ${U().nome}. Today only shows if there is still time.`)],
  hora:[()=>L('Que horas?','What time?'),()=>L(`${fmtDia(dias()[R.dia])}. Só os horários com a cozinha aberta.`,`${fmtDia(dias()[R.dia])}. Only times when the kitchen is open.`)],
  pessoas:[()=>L('Quantas pessoas?','How many people?'),()=>L('Contando com você.','Including you.')],
- ocasiao:[()=>L('É por algum motivo especial?','Is it a special occasion?'),()=>L('Ajuda a equipe a escolher a mesa.','Helps the team choose your table.')],
- pedidos:[()=>L('Precisa de alguma coisa?','Do you need anything?'),()=>L('Opcional. Se marcar algo, a equipe confere antes de confirmar.','Optional. If you tick something, the team checks it before confirming.')],
+ pedidos:[()=>L('Algo especial? (opcional)','Anything special? (optional)'),()=>L('Pode pular. A ocasião ajuda a escolher a mesa; se marcar um pedido, a equipe confere antes de confirmar.','You can skip this. The occasion helps choose the table; if you tick a request, the team checks it before confirming.')],
  contato:[()=>L('Em nome de quem?','Under what name?'),()=>L('A confirmação e o lembrete chegam neste WhatsApp.','Confirmation and reminder arrive on this WhatsApp.')],
  revisar:[()=>L('Confere para a gente?','Can you check?'),()=>L('Toque em qualquer passo ao lado para mudar.','Tap any step to change it.')],
  enviando:[()=>L('Conferindo a mesa…','Checking the table…'),()=>'']
 };
-const NOMES={casa:['Casa','Restaurant'],dia:['Dia','Day'],hora:['Horário','Time'],pessoas:['Pessoas','Guests'],ocasiao:['Ocasião','Occasion'],pedidos:['Pedidos','Requests'],contato:['Nome','Name'],revisar:['Revisão','Review']};
+const NOMES={casa:['Casa','Restaurant'],dia:['Dia','Day'],hora:['Horário','Time'],pessoas:['Pessoas','Guests'],pedidos:['Pedidos','Requests'],contato:['Nome','Name'],revisar:['Revisão','Review']};
 function valor(k){const ds=dias();
  if(k==='casa'&&R.casa)return U().nome; if(k==='dia'&&R.dia!==null)return fmtDia(ds[R.dia]); if(k==='hora'&&R.hora!==null)return hm(R.hora);
- if(k==='pessoas'&&R.pessoas)return String(R.pessoas); if(k==='ocasiao'&&R.ocasiao)return nomeDe(OCASIOES,R.ocasiao);
- if(k==='pedidos')return R.pedidos.length||R.obs?String(R.pedidos.length+(R.obs?1:0)):L('nenhum','none'); if(k==='contato'&&R.nome)return R.nome.trim().split(' ')[0]; return '';}
-function pode(){const e=ETAPAS[R.e];return e==='casa'?!!R.casa:e==='dia'?R.dia!==null:e==='hora'?R.hora!==null:e==='pessoas'?(R.pessoas&&R.pessoas!=='9+'):e==='ocasiao'?!!R.ocasiao:e==='contato'?(R.nome.trim().length>1&&zapOk()):true;}
+ if(k==='pessoas'&&R.pessoas)return String(R.pessoas);
+ if(k==='pedidos'){const n=R.pedidos.length+(R.obs?1:0)+(R.ocasiao?1:0);return n?String(n):L('nenhum','none');} if(k==='contato'&&R.nome)return R.nome.trim().split(' ')[0]; return '';}
+function pode(){const e=ETAPAS[R.e];return e==='casa'?!!R.casa:e==='dia'?R.dia!==null:e==='hora'?R.hora!==null:e==='pessoas'?(R.pessoas&&R.pessoas!=='9+'):e==='contato'?(R.nome.trim().length>1&&zapOk()):true;}
 function estadoTxt(u){const s=estadoUnidade(u);return s.k==='aberta'?L(`Aberta agora, até ${hm(s.ate)}`,`Open now, until ${hm(s.ate)}`):s.k==='fechada'?L(`Fechada agora. Abre às ${hm(s.abre)}`,`Closed now. Opens at ${hm(s.abre)}`):L(`Abre às ${hm(s.abre)}`,`Opens at ${hm(s.abre)}`);}
 function pinta(){
  const e=ETAPAS[R.e],ds=dias();
  document.getElementById('demo').textContent=L(`Protótipo da Timeless para o ${MARCA.nome}. Nenhuma reserva é enviada.`,`Timeless prototype for ${MARCA.nome}. No booking is sent.`);
  document.getElementById('titulo').textContent=L('Reservar mesa','Book a table');
- document.getElementById('lang').textContent=lang==='en'?'PT':'EN';
+ const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');
  document.querySelectorAll('.etapa').forEach(s=>{s.classList.toggle('on',s.dataset.e===e);if(s.dataset.e===e&&TXT[e]){s.querySelector('h2').textContent=TXT[e][0]();const d=s.querySelector('.dica');if(d)d.textContent=TXT[e][1]();}});
- document.getElementById('trilha').innerHTML=ETAPAS.slice(0,8).map((k,i)=>{const st=i<R.e?'feito':i===R.e?'agora':'';const rot=L(...NOMES[k]);return `<li class="${st}">${i<R.e&&e!=='enviando'?`<button type="button" data-ir="${i}">${rot}</button>`:rot}<span>${i<R.e&&k!=='revisar'?valor(k):''}</span></li>`;}).join('');
+ document.getElementById('trilha').innerHTML=ETAPAS.slice(0,-1).map((k,i)=>{const st=i<R.e?'feito':i===R.e?'agora':'';const rot=L(...NOMES[k]);return `<li class="${st}">${i<R.e&&e!=='enviando'?`<button type="button" data-ir="${i}">${rot}</button>`:rot}<span>${i<R.e&&k!=='revisar'?valor(k):''}</span></li>`;}).join('');
  if(R.casa){const u=U();document.getElementById('foto').style.backgroundImage=`url(${u.foto||MARCA.foto})`;}else document.getElementById('foto').style.backgroundImage=`url(${MARCA.foto})`;
  if(e==='casa')document.getElementById('o-casa').innerHTML=MARCA.unidades.map(u=>`<button type="button" data-v="${u.id}" aria-pressed="${R.casa===u.id}"><b>${u.nome}</b>${u.end}<small>${estadoTxt(u)}</small></button>`).join('');
- if(e==='dia')document.getElementById('o-dia').innerHTML=ds.map(x=>{const v=!horas(x).length;const n=x.k===0?L('Hoje','Today'):x.k===1?L('Amanhã','Tomorrow'):(lang==='en'?DAYS[x.wd]:DIAS[x.wd]).slice(0,3);return `<button type="button" data-v="${x.k}" aria-pressed="${R.dia===x.k}" ${v?'disabled':''}>${n}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}${v?L(', encerrado',', closed'):''}</small></button>`}).join('');
+ if(e==='dia')document.getElementById('o-dia').innerHTML=ds.map(x=>{const v=!horas(x).length;const n=x.k===0?L('Hoje','Today'):x.k===1?L('Amanhã','Tomorrow'):(lang==='en'?DAYS[x.wd]:DIAS[x.wd]).slice(0,3);return `<button type="button" data-v="${x.k}" aria-pressed="${R.dia===x.k}" ${v?'disabled':''}>${n}<small>${x.dt.getDate()}/${x.dt.getMonth()+1}${v?(x.k===0&&U().hor[x.wd].length?L(', encerrado por hoje',', no more times today'):L(', fechado',', closed')):''}</small></button>`}).join('');
  if(e==='hora'){const hs=horas(ds[R.dia]),g=(a,b)=>hs.filter(t=>t>=a&&t<b),bt=t=>`<button type="button" data-v="${t}" aria-pressed="${R.hora===t}">${hm(t)}</button>`;
   document.getElementById('o-hora').innerHTML=[[L('Almoço','Lunch'),g(0,900)],[L('Tarde','Afternoon'),g(900,1050)],[L('Jantar','Dinner'),g(1050,1500)]].filter(x=>x[1].length).map(([t,l])=>`<div class="turno">${t}</div>${l.map(bt).join('')}`).join('');}
  if(e==='pessoas'){document.getElementById('o-pessoas').innerHTML=[1,2,3,4,5,6,7,8,'9+'].map(n=>`<button type="button" data-v="${n}" aria-pressed="${String(R.pessoas)===String(n)}">${n}</button>`).join('');
-  document.getElementById('a-pessoas').innerHTML=R.pessoas==='9+'?L(`Para 9 pessoas ou mais, quem monta a mesa é a equipe de eventos. <a href="${MARCA.eventos}">Fazer um pedido de evento</a>.`,`For 9 or more, the events team sets the table. <a href="${MARCA.eventos}">Make an event request</a>.`):R.pessoas>=6?L('Para grupos a partir de 6, a equipe junta as mesas e confirma pelo WhatsApp.','For groups of 6 or more, the team joins tables and confirms on WhatsApp.'):'';}
- if(e==='ocasiao')document.getElementById('o-ocasiao').innerHTML=OCASIOES.map(o=>`<button type="button" data-v="${o[0]}" aria-pressed="${R.ocasiao===o[0]}">${lang==='en'?o[2]:o[1]}</button>`).join('');
- if(e==='pedidos'){document.getElementById('o-pedidos').innerHTML=PEDIDOS.map(o=>`<label><input type="checkbox" value="${o[0]}" ${R.pedidos.includes(o[0])?'checked':''}> ${lang==='en'?o[2]:o[1]}</label>`).join('');
+  document.getElementById('a-pessoas').innerHTML=R.pessoas==='9+'?L(`Para 9 pessoas ou mais, quem monta a mesa é a equipe de eventos. <a href="${MARCA.eventos}">${(MARCA.eventosRotulo||['Fazer um pedido de evento'])[0]}</a>.`,`For 9 or more, the events team sets the table. <a href="${MARCA.eventos}">${(MARCA.eventosRotulo||[0,'Make an event request'])[1]}</a>.`):R.pessoas>=6?L('Para grupos a partir de 6, a equipe junta as mesas e confirma pelo WhatsApp.','For groups of 6 or more, the team joins tables and confirms on WhatsApp.'):'';}
+ if(e==='pedidos'){document.getElementById('t-ocasiao').textContent=L('Ocasião','Occasion');document.getElementById('t-pedidos').textContent=L('Pedidos','Requests');
+  document.getElementById('o-ocasiao').innerHTML=OCASIOES.map(o=>`<button type="button" data-v="${o[0]}" aria-pressed="${R.ocasiao===o[0]}">${lang==='en'?o[2]:o[1]}</button>`).join('');document.getElementById('o-pedidos').innerHTML=PEDIDOS.map(o=>`<label><input type="checkbox" value="${o[0]}" ${R.pedidos.includes(o[0])?'checked':''}> ${lang==='en'?o[2]:o[1]}</label>`).join('');
   document.getElementById('l-obs').textContent=R.ocasiao==='aniversario'?L('Restrição alimentar ou recado para o aniversário (opcional)','Dietary restriction or a note for the birthday (optional)'):L('Restrição alimentar ou outro pedido (opcional)','Dietary restriction or other request (optional)');document.getElementById('i-obs').value=R.obs;}
  if(e==='contato'){document.getElementById('l-nome').textContent=L('Nome','Name');document.getElementById('i-nome').value=R.nome;document.getElementById('i-zap').value=R.zap;}
- if(e==='revisar')document.getElementById('resumo').innerHTML=linhas().map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
+ if(e==='revisar')document.getElementById('resumo').innerHTML=linhas().map(([a,b])=>`<div><dt>${a}</dt><dd>${esc(b)}</dd></div>`).join('');
  document.getElementById('navega').style.display=e==='enviando'?'none':'flex';
  const v=document.getElementById('b-voltar');v.style.visibility=R.e?'visible':'hidden';v.textContent=L('Voltar','Back');
  const s=document.getElementById('b-seguir');s.disabled=!pode();s.textContent=e==='revisar'?L('Fazer a reserva','Book now'):L('Continuar','Continue');
 }
 function linhas(){const x=dias()[R.dia],p=R.pedidos.map(k=>nomeDe(PEDIDOS,k));if(R.obs.trim())p.push(R.obs.trim());
- return [[L('Casa','Restaurant'),`${MARCA.nome} ${U().nome}`],[L('Dia','Day'),fmtDia(x)],[L('Horário','Time'),hm(R.hora)],[L('Pessoas','Guests'),R.pessoas],[L('Ocasião','Occasion'),nomeDe(OCASIOES,R.ocasiao)],[L('Pedidos','Requests'),p.join('; ')||L('nenhum','none')],[L('Nome','Name'),R.nome.trim()],['WhatsApp',R.zap]];}
+ const l=[[L('Casa','Restaurant'),`${MARCA.nome} ${U().nome}`],[L('Dia','Day'),fmtDia(x)],[L('Horário','Time'),hm(R.hora)],[L('Pessoas','Guests'),R.pessoas],[L('Ocasião','Occasion'),nomeDe(OCASIOES,R.ocasiao)||L('não informada','not given')],[L('Pedidos','Requests'),p.join('; ')||L('nenhum','none')],[L('Nome','Name'),R.nome.trim()],['WhatsApp',R.zap]];
+ if(MESA)l.splice(6,0,[L('Pedido sugerido','Suggested order'),MESA]);
+ return l;}
 function vai(n){R.e=n;pinta();const h=document.querySelector('.etapa.on h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}if(innerWidth<860)scrollTo({top:0});}
 const F=document.getElementById('form');
 F.addEventListener('click',ev=>{const ir=ev.target.closest('[data-ir]');if(ir){vai(+ir.dataset.ir);return;}
  const b=ev.target.closest('.opcoes button');if(!b)return;const e=ETAPAS[R.e],v=b.dataset.v;
- if(e==='casa'){if(R.casa!==v){R.dia=null;R.hora=null;}R.casa=v;}
- if(e==='dia'){if(R.dia!==+v)R.hora=null;R.dia=+v;} if(e==='hora')R.hora=+v; if(e==='pessoas')R.pessoas=v==='9+'?'9+':+v; if(e==='ocasiao')R.ocasiao=v;
- pinta(); if(['casa','dia','hora','ocasiao'].includes(e)||(e==='pessoas'&&R.pessoas!=='9+'&&R.pessoas<6))setTimeout(()=>vai(R.e+1),260);});
+ if(e==='casa'){if(R.casa!==v){R.dia=null;R.hora=null;}R.casa=v;try{localStorage.setItem(CH,v)}catch(e){}diaPadrao();}
+ if(e==='dia'){if(R.dia!==+v)R.hora=null;R.dia=+v;} if(e==='hora')R.hora=+v; if(e==='pessoas')R.pessoas=v==='9+'?'9+':+v; if(e==='pedidos')R.ocasiao=R.ocasiao===v?null:v;
+ pinta(); if(['casa','dia','hora'].includes(e)||(e==='pessoas'&&R.pessoas!=='9+'&&R.pessoas<6))setTimeout(()=>vai(R.e+1),260);});
 document.getElementById('trilha').addEventListener('click',ev=>{const ir=ev.target.closest('[data-ir]');if(ir)vai(+ir.dataset.ir);});
 F.addEventListener('change',ev=>{if(ev.target.closest('#o-pedidos'))R.pedidos=[...document.querySelectorAll('#o-pedidos input:checked')].map(x=>x.value);});
 F.addEventListener('input',ev=>{const id=ev.target.id;if(id==='i-obs')R.obs=ev.target.value;if(id==='i-nome')R.nome=ev.target.value;if(id==='i-zap')R.zap=ev.target.value;
- document.getElementById('e-zap').textContent=(R.zap&&!zapOk())?L('Coloque o DDD e o número completo.','Add the area code and full number.'):'';document.getElementById('b-seguir').disabled=!pode();});
+ document.getElementById('e-zap').textContent=(R.zap&&!zapOk())?L('Use o número de WhatsApp (celular), com DDD: (85) 9 0000-0000.','Use a WhatsApp (mobile) number with area code: (85) 9 0000-0000.'):'';document.getElementById('b-seguir').disabled=!pode();});
 F.addEventListener('submit',ev=>ev.preventDefault());
 document.getElementById('b-voltar').addEventListener('click',()=>vai(Math.max(0,R.e-1)));
 document.getElementById('b-seguir').addEventListener('click',()=>{if(!pode())return;if(ETAPAS[R.e]==='revisar'){envia();return;}vai(R.e+1);});
@@ -208,7 +215,7 @@ function envia(){
  [...ul.children].forEach((li,i)=>setTimeout(()=>li.classList.add('ok'),400+i*600));
  const ini=new Date(x.dt);ini.setHours(R.hora/60|0,R.hora%60,0,0);
  const codigo=MARCA.prefixo+'-'+u.sigla+String(x.dt.getDate()).padStart(2,'0')+String(R.hora/30|0).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,5).toUpperCase();
- Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(R.hora),pessoas:R.pessoas,ocasiao:nomeDe(OCASIOES,R.ocasiao),pedidos:R.pedidos.map(k=>nomeDe(PEDIDOS,k)),obs:R.obs.trim(),nome:R.nome.trim(),zap:R.zap,status:auto?'confirmada':'aguardando',motivos:seg});
+ Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(R.hora),pessoas:R.pessoas,ocasiao:nomeDe(OCASIOES,R.ocasiao),pedidos:R.pedidos.map(k=>nomeDe(PEDIDOS,k)),mesa:MESA,obs:R.obs.trim(),nome:R.nome.trim(),zap:R.zap,status:auto?'confirmada':'aguardando',motivos:seg});
  setTimeout(()=>fim(x,auto,ini),400+passos.length*600+300);
 }
 function fim(x,auto,ini){
@@ -219,15 +226,16 @@ function fim(x,auto,ini){
  const pt=grupo&&ped?`Como é um grupo de ${R.pessoas} e há pedidos especiais`:grupo?`Como é um grupo de ${R.pessoas}`:'Como há pedidos especiais';
  const en=grupo&&ped?`Since it's a group of ${R.pessoas} with special requests`:grupo?`Since it's a group of ${R.pessoas}`:'Since there are special requests';
  document.getElementById('f-texto').textContent=auto?L(`Mandamos a confirmação para ${R.zap} e um lembrete no dia, duas horas antes. Para mudar ou cancelar, é só responder a mensagem.`,`We sent the confirmation to ${R.zap} and will remind you two hours before. To change or cancel, just reply.`):L(`O horário está livre. ${pt}, a equipe do ${u.nome} separa a mesa e confirma pelo WhatsApp ${R.zap}.`,`The time is free. ${en}, the ${u.nome} team will set the table and confirm on WhatsApp ${R.zap}.`);
- document.getElementById('f-resumo').innerHTML=linhas().slice(0,5).map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
+ document.getElementById('f-resumo').innerHTML=[...linhas().slice(0,4),[L('Endereço','Address'),`<a href="${u.mapa}" target="_blank" rel="noopener">${esc(u.end)}</a>`]].map(([a,b],i)=>`<div><dt>${a}</dt><dd>${i===4?b:esc(b)}</dd></div>`).join('');
  const fimH=new Date(ini.getTime()+2*3600e3),f=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}00`;
  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//${MARCA.nome}//PT\r\nBEGIN:VEVENT\r\nUID:${Date.now()}@${MARCA.id}\r\nDTSTART;TZID=America/Fortaleza:${f(ini)}\r\nDTEND;TZID=America/Fortaleza:${f(fimH)}\r\nSUMMARY:${MARCA.nome} ${u.nome}, mesa para ${R.pessoas}\r\nLOCATION:${u.end}, Fortaleza\r\nEND:VEVENT\r\nEND:VCALENDAR`;
  document.getElementById('f-acoes').innerHTML=`<a download="${MARCA.id}.ics" href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}">${L('Pôr na agenda','Add to calendar')}</a><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="../#cardapio">${L('Ver o cardápio','See the menu')}</a>`;
- document.getElementById('f-nota').innerHTML=L('Protótipo: nenhuma mensagem foi enviada. A ficha desta reserva apareceu no <a href="../../painel/">painel da equipe</a>, que é o que a casa veria.','Prototype: no message was sent. This booking now shows in the <a href="../../painel/">team panel</a>, which is what the restaurant would see.');
+ const msg=[L(`Olá! Reserva no ${MARCA.nome} ${u.nome}.`,`Hello! Booking at ${MARCA.nome} ${u.nome}.`),...linhas().slice(1).map(([a,b])=>`${a}: ${b}`)].join('\n');
+ document.getElementById('f-nota').innerHTML=L('<b>Reserva de demonstração: nada foi enviado à casa.</b> A ficha desta reserva apareceu no <a href="../../painel/">painel da equipe</a>, neste mesmo navegador. No site publicado, a casa recebe esta mensagem no WhatsApp, com todos os dados, e não precisa perguntar de novo:','<b>Demo booking: nothing was sent to the restaurant.</b> It now shows in the <a href="../../painel/">team panel</a>, in this same browser. On the live site, the restaurant gets this WhatsApp message with every detail:')+`<span style="display:block;white-space:pre-line;margin-top:8px;padding:10px 12px;background:var(--fundo-2)">${esc(msg)}</span>`;
  document.getElementById('fim').classList.add('on');
 }
 const lg=document.getElementById('logo');lg.src=MARCA.logo;lg.alt=MARCA.nome;
-pinta();
+diaPadrao(); pinta();
 </script>
 </body>
 </html>

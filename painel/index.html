@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#9C9292;--acento:#C4161C;--acento-txt:#fff;--regra:#DDD5D0;
+:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#7A7070;--acento:#C4161C;--acento-txt:#fff;--regra:#DDD5D0;
   --serif:'Bodoni Moda',Didot,serif;--sans:'Raleway',system-ui,sans-serif;--peso-titulo:400;--borda:2px;--raio:0;--logo-filtro:invert(1);--logo-blend:multiply}
 /* Área interna: mais densa que o site, com a mesma marca. */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -54,7 +54,7 @@ main{max-width:1100px;margin:0 auto;padding:28px}
 </style>
 </head>
 <body>
-<div class="demo">Protótipo do painel da equipe. No ar, esta área tem login e cada unidade vê as suas reservas.</div>
+<div class="demo">Protótipo do painel da equipe. Na versão final, esta área terá login e cada unidade verá só as suas reservas.</div>
 <header><img id="logo" alt=""><h1>Reservas</h1><span class="quem" id="hoje"></span></header>
 <main>
   <div class="numeros" id="numeros"></div>
@@ -78,6 +78,7 @@ const dd=(k,h,m)=>{const x=new Date(base);x.setDate(base.getDate()+k);x.setHours
 const fd=x=>`${DIAS[x.getDay()]}, ${x.getDate()}/${x.getMonth()+1}`;
 let exemplos=(MARCA.exemplos||[]).map((e,i)=>{const x=dd(e.k,e.h,e.m);return {...e,codigo:MARCA.prefixo+'-EX'+(i+1),exemplo:1,inicio:x.toISOString(),dia:fd(x),hora:hm(e.h*60+e.m)};});
 let fCasa='todas',fStatus='todas';
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const todas=()=>[...Reservas.todas(),...exemplos].sort((a,b)=>new Date(a.inicio)-new Date(b.inicio));
 function muda(c,s){if(c.includes('-EX')){exemplos.find(x=>x.codigo===c).status=s;}else Reservas.muda(c,{status:s});pinta();}
 function pinta(){
@@ -87,10 +88,10 @@ function pinta(){
  document.getElementById('numeros').innerHTML=[[ag,'para confirmar',ag?'alerta':''],[at.length,'reservas ativas',''],[at.reduce((s,x)=>s+Number(x.pessoas),0),'pessoas esperadas',''],[Reservas.todas().length,'feitas pelo site agora','']].map(([n,t,c])=>`<div class="${c}"><b>${n}</b><span>${t}</span></div>`).join('');
  document.getElementById('f-casa').innerHTML=[['todas','Todas as casas'],...MARCA.unidades.map(u=>[u.id,u.nome])].map(([k,n])=>`<button type="button" data-c="${k}" aria-pressed="${fCasa===k}">${n}</button>`).join('');
  const vis=l.filter(x=>fStatus==='todas'||x.status===fStatus);
- document.getElementById('lista').innerHTML=vis.length?vis.map(x=>{const det=[x.pessoas+' pessoas',x.ocasiao,...x.pedidos,x.obs?`“${x.obs}”`:''].filter(Boolean).join(' · ');const u=unidade(x.casa);
+ document.getElementById('lista').innerHTML=vis.length?vis.map(x=>{const det=[x.pessoas+' pessoas',x.ocasiao,...x.pedidos,x.mesa?`pedido sugerido: ${x.mesa}`:'',x.obs?`“${x.obs}”`:''].filter(Boolean).map(esc).join(' · ');const u=unidade(x.casa);
   return `<div class="ficha"><div class="quando"><b>${x.hora}</b><span>${x.dia}</span><br><span class="casa">${u?u.nome:''}</span></div>
-  <div class="quem"><b>${x.nome}</b><small>${x.zap}</small>${x.exemplo?'<span class="exemplo">exemplo</span>':''}<div class="det">${det}</div>
-  ${x.status==='aguardando'&&x.motivos.length?`<div class="triagem">Conferir antes de confirmar: ${x.motivos.join(', ')}</div>`:''}<div class="cod">${x.codigo}</div></div>
+  <div class="quem"><b>${esc(x.nome)}</b><small>${esc(x.zap)}</small>${x.exemplo?'<span class="exemplo">exemplo</span>':''}<div class="det">${det}</div>
+  ${x.status==='aguardando'&&x.motivos.length?`<div class="triagem">Conferir antes de confirmar: ${esc(x.motivos.join(', '))}</div>`:''}<div class="cod">${x.codigo}</div></div>
   <div class="lado"><div class="estado ${x.status}">${{aguardando:'Para confirmar',confirmada:'Confirmada',cancelada:'Cancelada'}[x.status]}</div><div class="acoes">
   ${x.status==='aguardando'?`<button type="button" class="sim" data-r="${x.codigo}" data-s="confirmada">Confirmar</button>`:''}${x.status!=='cancelada'?`<button type="button" data-r="${x.codigo}" data-s="cancelada">Cancelar</button>`:''}
   <a href="https://wa.me/55${x.zap.replace(/\D/g,'').replace(/^55/,'')}" target="_blank" rel="noopener">WhatsApp</a></div></div></div>`;}).join(''):`<p class="vazio">Nada aqui. <a href="../site/reservar/">Fazer uma reserva pelo site</a> para ver como ela chega.</p>`;
