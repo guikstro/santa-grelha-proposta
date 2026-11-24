@@ -1,0 +1,109 @@
+/* Santa Grelha, sistema visual. Estrutura do DESIGN.md "Amrit Palace"; identidade do próprio Santa Grelha:
+   linho branco, o vermelho e o monograma da casa, a Bodoni do logo. Fotos escuras do salão abrem e fecham a página.
+   Serifa de peso 300 em caixa-alta, enorme e apertada; o resto em Satoshi 500, pequeno.
+   Quina viva em tudo (0px); só botão e campo têm 3px. Botões sempre de contorno, nunca cheios.
+   Divisórias de 1px como fios de coluna de jornal. Um só acento: o vermelho do monograma, raro. */
+:root{
+  --pergaminho:#f6f2ec;--linho:#ece6dd;--pedra:#d9d0c6;--nogueira:#8c8380;--cafe:#5e5555;--onix:#1b1616;--torra:#1e1715;--sg:#c4161c;--caneta:#24357a;
+  --serif:'Bodoni Moda',Didot,serif;--mao:'Nanum Pen Script','Bradley Hand',cursive;--sans:'Satoshi',ui-sans-serif,system-ui,sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --logo:url(https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--pergaminho);scroll-behavior:smooth}
+body{background:var(--pergaminho);color:var(--onix);font:500 14px/1.4 var(--sans);letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0;letter-spacing:inherit}
+button{cursor:pointer}
+img,video{display:block;max-width:100%}
+:focus-visible{outline:1px solid var(--sg);outline-offset:3px}
+[hidden]{display:none!important}
+::selection{background:var(--onix);color:var(--pergaminho)}
+
+.serif{font-family:var(--serif);font-weight:400;text-transform:uppercase}
+.d-xl{font-size:clamp(60px,7.6vw,110px);line-height:.86;letter-spacing:-.02em}
+.d-l{font-size:clamp(44px,4.8vw,69px);line-height:.92;letter-spacing:-.015em}
+.d-m{font-size:clamp(34px,3.5vw,50px);line-height:.95;letter-spacing:-.01em}
+.d-s{font-size:26px;line-height:1.05;letter-spacing:-.006em}
+.rot{font-size:12px;text-transform:uppercase;letter-spacing:-.012em}
+.leg{font-size:13px;color:var(--nogueira);letter-spacing:-.011em}
+.corpo{font-size:15px;line-height:1.4;color:var(--cafe);max-width:52ch}
+.corpo-g{font-size:clamp(20px,2vw,26px);line-height:1.2;letter-spacing:-.006em}
+.acento{color:var(--sg)}
+
+/* botões: contorno de 1px, quina de 3px */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:14px 22px;border:1px solid currentColor;border-radius:3px;font-size:14px;text-transform:uppercase;letter-spacing:-.01em;line-height:1;transition:background .4s var(--ease),color .4s var(--ease)}
+.btn:hover,.btn[aria-pressed=true]{background:var(--onix);color:var(--pergaminho);border-color:var(--onix)}
+.escuro .btn:hover,.escuro .btn[aria-pressed=true]{background:var(--pergaminho);color:var(--onix);border-color:var(--pergaminho)}
+.btn:disabled{opacity:.35;cursor:not-allowed;background:none!important;color:inherit!important}
+.btn.quad{width:46px;padding:0}
+.link{font-size:13px;text-transform:uppercase;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color .4s var(--ease)}
+.link:hover{text-decoration-color:currentColor}
+svg.ic{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.fio{border:0;border-top:1px solid var(--pedra)}
+.escuro{background:var(--torra);color:var(--pergaminho)}
+.escuro .fio{border-top-color:rgba(216,203,184,.25)}
+.escuro .corpo{color:rgba(216,203,184,.78)}
+.escuro .leg{color:rgba(216,203,184,.6)}
+
+/* fichas */
+.fichas{display:flex;flex-wrap:wrap;gap:6px}
+.fichas.rola{max-width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.fichas.rola::-webkit-scrollbar{display:none}
+.fichas .btn{flex:none;min-height:42px;padding:10px 14px;font-size:13px;flex-direction:column;gap:2px}
+.fichas .btn small{font-size:10px;opacity:.7}
+
+/* campo com 3px */
+.campo{display:block;margin-top:12px}
+.campo span{display:block;font-size:12px;text-transform:uppercase;color:var(--nogueira);margin-bottom:6px}
+.campo input{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--pedra);border-radius:3px;font-size:15px;outline:none;transition:border-color .4s var(--ease)}
+.campo input:focus{border-color:var(--onix)}
+.erro{font-size:12.5px;color:var(--sg);min-height:1.3em;margin-top:6px}
+
+/* monograma em máscara: herda a cor */
+.mono{display:block;width:var(--w,64px);aspect-ratio:600/440;background:currentColor;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+
+/* faixa que corre: o único movimento com personalidade */
+.corre{overflow:hidden;border-top:1px solid var(--pedra);border-bottom:1px solid var(--pedra);padding:18px 0}
+.corre div{display:flex;gap:40px;width:max-content;animation:corre 27s linear infinite}
+.corre span{font:400 40px/1 var(--serif);text-transform:uppercase;letter-spacing:-.03em;white-space:nowrap}
+.corre span::after{content:'·';margin-left:40px;color:var(--sg)}
+@keyframes corre{to{transform:translateX(-50%)}}
+
+/* reserva (reserva.js) */
+.rv-r{margin:18px 0 8px}
+.rv-pe{display:flex;gap:8px;margin-top:22px}
+.rv-pe .rv-ok{flex:1}
+.rv-etapas{display:flex;gap:6px}
+.rv-etapas span{flex:1;padding-top:8px;border-top:1px solid var(--pedra);font-size:11px;text-transform:uppercase;color:var(--nogueira)}
+.rv-etapas span.ok{border-top-color:var(--onix);color:var(--onix)}
+.rv-resumo{margin-top:16px;padding:20px 0;border-top:1px solid var(--pedra);border-bottom:1px solid var(--pedra)}
+.rv-resumo b{display:block;font:400 30px/.95 var(--serif);text-transform:uppercase;letter-spacing:-.03em}
+.rv-nota{font-size:12px;color:var(--nogueira);margin-top:12px}
+.rv-feito .rv-cartao{padding:28px 0 22px;border-top:1px solid var(--onix);border-bottom:1px solid var(--onix)}
+.rv-feito .rv-cartao b{display:block;font:300 clamp(48px,7vw,69px)/.85 var(--serif);text-transform:uppercase;letter-spacing:-.04em;margin-top:10px}
+.rv-feito .rv-cartao .rv-cod{display:flex;justify-content:space-between;gap:10px;margin-top:16px;font-size:12px;text-transform:uppercase}
+
+.revela{opacity:0;transform:translateY(18px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.revela.vista{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.revela{opacity:1;transform:none}}
+
+/* a comanda da reserva: escrita à mão enquanto se escolhe, carimbada no fim */
+.papel{position:relative;overflow:hidden;background:#fffdf9;padding:16px 18px 6px;border:1px solid var(--pedra);margin-bottom:6px}
+.papel .cab-p{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1.5px solid var(--sg)}
+.papel .cab-p .mono{--w:44px;color:var(--sg)}
+.papel .cab-p span{font-size:10px;text-transform:uppercase;color:var(--cafe);text-align:right}
+.papel .cab-p span b{display:block;font:400 17px var(--serif);text-transform:none;color:var(--onix)}
+.linha{display:flex;align-items:flex-end;gap:10px;height:38px;padding-bottom:5px;border-bottom:1px solid rgba(36,53,122,.14)}
+.linha:last-of-type{border-bottom:0}
+.linha small{flex:none;width:58px;font-size:9.5px;text-transform:uppercase;color:var(--cafe)}
+.linha .mao{font:26px/1 var(--mao);color:var(--caneta);white-space:nowrap;overflow:hidden;clip-path:inset(0 100% 0 0);transition:clip-path .9s steps(14,end)}
+.linha .mao.escrito{clip-path:inset(0 0 0 0)}
+.carimbo{position:absolute;right:14px;top:56px;width:130px;height:130px;border:4px double var(--sg);border-radius:50%;color:var(--sg);display:grid;place-items:center;text-align:center;filter:url(#tinta);opacity:0;transform:scale(2.2) rotate(-24deg);pointer-events:none}
+.carimbo.on{animation:carimba .5s cubic-bezier(.5,0,.3,1.4) forwards}
+@keyframes carimba{to{opacity:.88;transform:scale(1) rotate(-14deg)}}
+.carimbo b{font:400 16px/1.05 var(--serif);text-transform:uppercase}
+.carimbo small{display:block;font-size:8.5px;margin-top:4px}
+.canhoto{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#fffdf9;border:1px solid var(--pedra);border-top:2px dotted var(--pedra);transition:transform .9s cubic-bezier(.5,0,.2,1)}
+.canhoto.solta{transform:translateY(16px) rotate(-4deg)}
+.canhoto span{font-size:10px;text-transform:uppercase;color:var(--cafe)}
+.canhoto b{font:24px var(--mao);color:var(--caneta);font-weight:400}
