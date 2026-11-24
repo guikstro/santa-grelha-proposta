@@ -1,6 +1,6 @@
 # Santa Grelha · entrega da Timeless
 
-Protótipo privado do Santa Grelha, do Grupo Social Clube. Não publicar sem o ok do Guilherme. Todas as páginas têm `noindex` e o `robots.txt` bloqueia buscadores.
+Protótipo do Santa Grelha, do Grupo Social Clube, publicado com o ok do Guilherme em 24/11/2026 só para a casa ver. Não é o site oficial. Todas as páginas têm `noindex` e o `robots.txt` bloqueia buscadores.
 
 | Pasta | O que é | No ar |
 |---|---|---|
