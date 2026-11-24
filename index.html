@@ -134,6 +134,15 @@ p + p{margin-top:12px}
   .vem li{font-size:13px;padding:4px 0 4px 20px} .vem li::before{top:12px} .plano h4,.plano .val{font-size:24px} .inclui{break-inside:avoid}
 }
 
+/* Santa Grelha: a proposta é uma carta clássica, tudo num eixo central, como o site. */
+.folha>h2,.folha>h3,.folha>.texto{text-align:center;margin-left:auto;margin-right:auto}
+.capa .base{margin:0 auto;text-align:center}.capa .wm{margin:0 auto 22px}.capa .por{text-align:left}
+.achado{grid-template-columns:1fr;text-align:center;gap:8px}.achado p{max-width:60ch;margin:0 auto}
+.miudos h4,.fica,.elogio{text-align:center}
+.caminho li{text-align:center;padding:0 12px}.caminho li::after{left:calc(50% + 30px);right:calc(-50% + 30px)}
+.plano{grid-template-columns:1fr;text-align:center}.plano .val{text-align:center}.plano p{margin:0 auto}
+.vem{text-align:left}.inclui{text-align:center}.rodape-conta{margin-left:auto;margin-right:auto;text-align:center}
+@media print{.caminho li::after{display:none} .achado{grid-template-columns:1fr 2.2fr;text-align:left;gap:24px} .achado p{margin:0}}
 </style>
 </head>
 <body>
@@ -200,11 +209,11 @@ p + p{margin-top:12px}
   <h3>Três formas de servir</h3>
   <p class="texto mut">Os valores são para a marca, com as duas casas de Fortaleza no mesmo site.</p>
   <div class="conta">
-    <div class="plano"><h4>Página de links</h4><div class="val">R$ 590<small>de implantação + R$ 99 por mês</small><span class="prazo">no ar em 5 dias úteis</span></div>
+    <div class="plano"><h4>Página de links</h4><div class="val">R$ 390<small>de implantação + R$ 79 por mês</small><span class="prazo">no ar em 5 dias úteis</span></div>
       <p>O link da bio do Instagram. Para trocar o Linktree por uma página da casa, com as duas unidades de Fortaleza.</p><ul class="vem"><li>Página de links no domínio santagrelha.com.br, com o vermelho e o monograma da casa</li><li>Meireles e Iguatemi lado a lado, cada um com o estado de agora</li><li>O endereço do Meireles corrigido e o nome escrito certo</li><li>Cardápio, menu em inglês, eventos e iFood em ordem</li><li>Painel com os toques em cada botão, todo mês</li></ul></div>
-    <div class="plano rec"><h4>Site da casa<span class="sug">recomendado</span></h4><div class="val">R$ 1.490<small>de implantação + R$ 189 por mês</small><span class="prazo">no ar em 15 dias úteis</span></div>
+    <div class="plano rec"><h4>Site da casa<span class="sug">recomendado</span></h4><div class="val">R$ 990<small>de implantação + R$ 149 por mês</small><span class="prazo">no ar em 15 dias úteis</span></div>
       <p>Para o Santa Grelha ser achado no Google com a informação certa e o cardápio que funciona.</p><ul class="vem"><li class="tudo">Tudo da Página de links, mais:</li><li>Site novo em santagrelha.com.br, no lugar do WordPress atual, em português e inglês</li><li>Duas portas na primeira tela, com horário e estado de cada casa</li><li>Cardápio completo, que a casa edita sozinha, com espaço para marcar os alergênicos de cada prato</li><li>O Menu Executivo de segunda a quinta em destaque</li><li>Revisão da carta com a cozinha: correções e alergênicos que faltam</li><li>Reserva em passos por unidade, com confirmação e lembrete pelo WhatsApp</li><li>Painel por unidade: reservas para confirmar, a ficha de cada reserva e o código</li><li>Página de eventos que entrega o pedido pronto à equipe da casa</li><li>Horário, endereço e cardápio alinhados com o perfil do Google da casa (o dono do perfil dá o acesso), o Instagram e o Tripadvisor</li><li>Relatório do mês: visitas, reservas e de onde veio cada pessoa</li></ul></div>
-    <div class="plano"><h4>Canal direto</h4><div class="val">R$ 2.890<small>de implantação + R$ 329 por mês</small><span class="prazo">no ar em 25 dias úteis</span></div>
+    <div class="plano"><h4>Canal direto</h4><div class="val">R$ 1.990<small>de implantação + R$ 249 por mês</small><span class="prazo">no ar em 25 dias úteis</span></div>
       <p>Para vender parte do delivery pelo canal da casa, sem a comissão do aplicativo. A taxa do meio de pagamento continua.</p><ul class="vem"><li class="tudo">Tudo do Site da casa, mais:</li><li>Pedido direto pelo site, que chega pronto no WhatsApp da casa</li><li>Lista de clientes das duas casas, com consentimento</li><li>Cupom de volta para quem pediu direto</li><li>Relatório com pedidos, valor médio por pedido e o que mais sai</li></ul>
       <div class="calc" id="calc">
         <h5>Faça a conta com os números de vocês</h5>
@@ -237,7 +246,7 @@ p + p{margin-top:12px}
 </section>
 <script>
 (()=>{const $=i=>document.getElementById(i),n=i=>parseFloat(($(i).value||'').replace(/\./g,'').replace(',','.')),
- brl=v=>'R$ '+Math.round(v).toLocaleString('pt-BR'),MENS=329;
+ brl=v=>'R$ '+Math.round(v).toLocaleString('pt-BR'),MENS=249;
  function conta(){const p=n('c-ped'),v=n('c-val'),c=n('c-com'),t=n('c-tax'),r=$('c-res');
   if([p,v,c,t].some(x=>!isFinite(x))){r.innerHTML='';return;}
   const venda=p*v,com=venda*c/100,tax=venda*t/100,fica=com-tax-MENS;

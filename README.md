@@ -27,4 +27,4 @@ Depois abra `http://localhost:4630`.
 - Conferir de novo os achados no dia do envio.
 - Fotos e logo vêm do site do Grupo Social Clube por link direto. Para publicar, só fotos que a casa aprovar.
 - As traduções para inglês são nossas e precisam da revisão da casa.
-- Preços (24/11/2026, a confirmar): Página de links R$ 590 + R$ 99/mês; Site da casa R$ 1.490 + R$ 189/mês; Canal direto R$ 2.890 + R$ 329/mês, para a marca com as duas casas de Fortaleza.
+- Preços (24/11/2026): Página de links R$ 390 + R$ 79/mês; Site da casa R$ 990 + R$ 149/mês; Canal direto R$ 1.990 + R$ 249/mês, para a marca com as duas casas de Fortaleza.
