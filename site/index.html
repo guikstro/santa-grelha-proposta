@@ -10,11 +10,12 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Restaurant", "name": "Santa Grelha Meireles", "servesCuisine": ["Churrascaria", "Grelhados"], "telephone": "+55 85 3224-0249", "address": {"@type": "PostalAddress", "streetAddress": "R. Tibúrcio Cavalcante, 790, Meireles", "addressLocality": "Fortaleza", "addressRegion": "CE", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday"], "opens": "11:30", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday", "Friday", "Saturday"], "opens": "11:30", "closes": "23:00"}]}, {"@type": "Restaurant", "name": "Santa Grelha Iguatemi", "servesCuisine": ["Churrascaria", "Grelhados"], "telephone": "+55 85 3241-5541", "address": {"@type": "PostalAddress", "streetAddress": "Av. Washington Soares, 85, loja 779, Shopping Iguatemi", "addressLocality": "Fortaleza", "addressRegion": "CE", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "11:30", "closes": "22:00"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style>
 /* Santa Grelha: a carta clássica. Tudo centrado num eixo, como menu impresso de restaurante de toalha branca.
    A peça forte é a comanda: a reserva se escreve na comanda e termina com o carimbo da casa. */
-:root{--toalha:#FBFAF8;--papel:#fff;--linho:#F3EEEA;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#7A7070;--sg:#C4161C;--sg-escuro:#8E0E13;--regra:#DDD5D0;
+:root{--toalha:#FBFAF8;--papel:#fff;--linho:#F3EEEA;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#7A7070;--sg:#C4161C;--sg-escuro:#8E0E13;--regra:#DDD5D0;--caneta:#26387A;--pauta:#EADCD8;
+ --mao:'Nanum Pen Script','Bradley Hand',cursive;
  --serif:'Bodoni Moda',Didot,'Bodoni 72',serif;--sans:'Raleway',system-ui,sans-serif;
  --logo:url(https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -37,30 +38,32 @@ h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6.4vw,76px);lin
 .estados{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;font-size:16px;color:var(--tinta-2)}
 .estados b{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--tinta);margin-right:8px}
 .estados .on{color:var(--sg)}
-.moldura{max-width:860px;margin:42px auto 0;padding:0 22px}
-.moldura div{aspect-ratio:16/8;background:#2a2222 center/cover no-repeat;border:10px solid var(--papel);box-shadow:0 0 0 1px var(--regra)}
-.moldura p{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--tinta-2);margin-top:10px}
+/* a foto da casa em faixa; a comanda pousa por cima dela, como papel na mesa */
+.faixa{position:relative;max-width:1240px;margin:40px auto 0;height:min(58vh,540px);background:#2a2222 center 38%/cover no-repeat}
+.faixa figcaption{position:absolute;left:0;bottom:0;max-width:340px;padding:40px 24px 18px;color:#fff;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.4;background:linear-gradient(transparent,rgba(20,14,14,.7))}
 section{padding:96px 0 0}
 h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,54px);line-height:1.1}
 .lead{color:var(--tinta-2);max-width:52ch;margin:12px auto 0}
 
 /* ---------- a comanda ---------- */
-.comanda{max-width:470px;margin:34px auto 0;background:var(--papel);text-align:left;position:relative;
-  box-shadow:0 1px 0 var(--regra),0 18px 40px -28px rgba(27,22,22,.35);padding:26px 26px 18px;
-  background-image:repeating-linear-gradient(180deg,transparent 0 51px,#EFE6E3 51px 52px);background-position:0 92px}
-.comanda::before,.comanda::after{content:'';position:absolute;left:0;right:0;height:10px;
-  background:radial-gradient(circle at 6px -2px,var(--toalha) 6px,transparent 6.5px) 0 0/12px 10px repeat-x}
-.comanda::before{top:-1px}.comanda::after{bottom:-9px;transform:scaleY(-1)}
-.com-topo{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--sg);padding-bottom:10px;margin-bottom:4px}
-.com-topo .mono{width:54px;height:40px}
-.com-topo span{font-family:var(--serif);font-size:15px;color:var(--tinta-2);text-align:right}
-.linha{display:flex;align-items:baseline;gap:12px;width:100%;min-height:52px;padding:10px 0;background:none;border:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
-.linha .dt{font-size:13px;color:var(--tinta-3);width:76px;flex:none}
-.linha .dd{font-family:var(--serif);font-size:22px;line-height:1.2;flex:1}
-.linha .dd.vazio{color:#c4bbb7;font-style:italic;font-size:19px}
-.linha.aberta .dt{color:var(--sg)}
-.linha.aberta .dd{border-bottom:2px solid var(--sg)}
-.escolhas{margin:2px 0 14px;display:flex;flex-wrap:wrap;gap:6px}
+#comanda{padding-top:0;margin-top:-330px;position:relative;z-index:2}
+.comanda{width:min(500px,100%);margin:0 auto;background:var(--papel);text-align:left;position:relative;padding:20px 26px 22px;
+  transform:rotate(-.8deg);box-shadow:0 34px 60px -34px rgba(27,22,22,.6),0 1px 0 var(--regra)}
+.comanda::before{content:'';position:absolute;left:0;right:0;top:-9px;height:10px;
+  background:radial-gradient(circle at 6px 10px,var(--papel) 5.5px,transparent 6px) 0 0/12px 10px repeat-x}
+.com-topo{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:12px;border-bottom:3px double var(--sg);padding-bottom:10px}
+.com-topo .mono{width:46px;height:34px}
+.com-topo b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:30px;line-height:1;color:var(--sg)}
+.com-topo span{font-size:13px;color:var(--tinta-2);text-align:right;line-height:1.3}
+.com-topo i{font-style:normal;font-family:var(--mao);font-size:26px;color:var(--caneta)}
+.linha{display:flex;align-items:baseline;gap:12px;width:100%;min-height:56px;padding:12px 0 8px;background:none;border:0;border-bottom:1px solid var(--pauta);font:inherit;color:inherit;text-align:left;cursor:pointer}
+.linha .dt{font-size:13px;color:var(--sg);width:82px;flex:none}
+.linha .dd{font-family:var(--mao);font-size:31px;line-height:1;color:var(--caneta);flex:1}
+.linha .dd.vazio{font:italic 400 15px var(--sans);color:#b3a8a4}
+.linha.aberta{border-bottom-color:var(--sg)}
+.linha.aberta .dt{font-weight:600}
+.linha:hover .dd.vazio{color:var(--tinta-2)}
+.escolhas{margin:10px 0 12px;display:flex;flex-wrap:wrap;gap:6px}
 .escolhas button{background:var(--linho);border:0;font:500 15px var(--sans);color:var(--tinta);min-height:46px;min-width:58px;padding:4px 14px;cursor:pointer;line-height:1.2}
 .escolhas button small{display:block;font-weight:400;font-size:12px;color:var(--tinta-2)}
 .escolhas button:hover{background:#EADFD9}
@@ -68,18 +71,31 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,54px);lin
 .escolhas button[aria-pressed=true] small{color:#fff}
 .escolhas button:disabled{opacity:.4;cursor:not-allowed}
 .escolhas .turno{width:100%;font-size:13px;color:var(--tinta-3);margin-top:6px}
-.escolhas input{flex:1;min-width:0;background:transparent;border:0;border-bottom:2px solid var(--tinta);font:400 19px var(--sans);padding:8px 2px;min-height:48px;color:var(--tinta)}
+.escolhas input{flex:1;min-width:0;background:transparent;border:0;border-bottom:2px solid var(--caneta);font:400 30px var(--mao);color:var(--caneta);padding:4px 2px;min-height:48px}
 .escolhas .ok{background:var(--tinta);color:#fff}
 .erro{color:var(--sg);font-size:14px;width:100%}
-.fechar{display:block;width:100%;margin-top:14px;min-height:58px;background:var(--sg);color:#fff;border:0;font:600 17px var(--sans);cursor:pointer}
-.fechar:disabled{background:var(--tinta-3);cursor:not-allowed}
-.carimbo{position:absolute;right:18px;top:96px;width:178px;height:178px;border:4px double var(--sg);border-radius:50%;color:var(--sg);
-  display:none;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-14deg);mix-blend-mode:multiply;pointer-events:none;background:rgba(196,22,28,.04)}
-.carimbo b{font-family:var(--serif);font-size:25px;letter-spacing:.04em}
-.carimbo small{font-size:12px}
+.fechar{display:block;width:100%;margin-top:18px;min-height:58px;background:var(--sg);color:#fff;border:0;font:600 17px var(--sans);cursor:pointer}
+.fechar:hover{background:var(--sg-escuro)}
+.fechar:disabled{background:transparent;color:var(--tinta-2);border:1px dashed #cdbfba;font-weight:500;cursor:default}
+.carimbo{position:absolute;right:16px;top:86px;width:176px;height:176px;border:5px double var(--sg);border-radius:50%;color:var(--sg);filter:url(#tinta);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:rotate(-14deg);mix-blend-mode:multiply;pointer-events:none;opacity:.88}
+.carimbo .mono{width:38px;height:28px}
+.carimbo b{font-family:var(--serif);font-size:26px;line-height:1}
+.carimbo small{font:600 12px var(--sans)}
 .carimbo.on{display:flex;animation:carimba .45s cubic-bezier(.2,1.6,.4,1)}
-@keyframes carimba{from{transform:rotate(-14deg) scale(1.8);opacity:0}to{transform:rotate(-14deg) scale(1);opacity:1}}
-.pos{max-width:514px;margin:18px auto 0;padding:0 22px;font-size:15px;color:var(--tinta-2);text-align:left}
+@keyframes carimba{from{transform:rotate(-14deg) scale(1.9);opacity:0}to{transform:rotate(-14deg) scale(1);opacity:.88}}
+/* o canhoto: a parte que o cliente leva */
+.canhoto{width:min(500px,100%);margin:0 auto;background:var(--papel);text-align:left;padding:18px 26px 20px;border-top:2px dashed #cdbfba;
+  box-shadow:0 30px 50px -34px rgba(27,22,22,.55);transform:rotate(1.4deg) translateY(22px);animation:destaca .6s ease both}
+@keyframes destaca{from{transform:rotate(-.8deg) translateY(0)}to{transform:rotate(1.4deg) translateY(22px)}}
+.canhoto small{font-size:13px;color:var(--sg)}
+.canhoto .cod{font-family:var(--mao);font-size:40px;line-height:1;color:var(--caneta);margin:2px 0 6px}
+.canhoto .res{font-family:var(--serif);font-size:20px;line-height:1.35}
+.canhoto .acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.canhoto .acoes a{min-height:46px;display:inline-flex;align-items:center;padding:0 16px;border:1px solid var(--tinta);text-decoration:none;font-weight:600;font-size:15px}
+.canhoto .acoes a:first-child{background:var(--tinta);color:#fff}
+.instr{max-width:500px;margin:20px auto 0;font-family:var(--serif);font-style:italic;color:var(--tinta-2);padding:0 22px}
+.pos{max-width:544px;margin:46px auto 0;padding:0 22px;font-size:15px;color:var(--tinta-2);text-align:left}
 .pos .msg{white-space:pre-line;background:var(--linho);padding:10px 12px;margin-top:8px;font-size:14px}
 .pos a{font-weight:600}
 
@@ -127,7 +143,10 @@ footer p+p{margin-top:6px}
 .ferr button[aria-pressed=true]{background:var(--tinta);color:#fff}
 @media (max-width:700px){
   .casas{grid-template-columns:1fr} form{grid-template-columns:1fr}
-  .carimbo{width:140px;height:140px;right:10px} .carimbo b{font-size:19px} .carimbo small{font-size:10.5px}
+  .carimbo{width:140px;height:140px;right:8px} .carimbo b{font-size:20px} .carimbo small{font-size:10.5px} .carimbo .mono{width:30px;height:22px}
+  .faixa{height:44vh;margin-top:28px} .faixa figcaption{display:none}
+  #comanda{margin-top:-120px;padding:0 12px} .comanda,.canhoto{padding-left:18px;padding-right:18px} .comanda{transform:none}
+  .linha .dt{width:70px} .com-topo b{font-size:26px}
   .indice{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;white-space:nowrap;padding-left:4px}
   section{padding-top:72px}
 }
@@ -148,22 +167,19 @@ footer p+p{margin-top:6px}
     <h1 data-t="h1">Duas casas, a mesma brasa.</h1>
     <div class="estados" id="estados" aria-live="polite"></div>
   </div>
-  <figure class="moldura">
-    <div style="background-image:url(https://static.wixstatic.com/media/404bb8_12f9ebec04d744c3be7153db3744b25d~mv2.jpg/v1/fill/w_1600,h_800,al_c,q_82,enc_auto/sg.jpg)" role="img" aria-label="Fachada de madeira do Santa Grelha Meireles"></div>
-    <p data-t="leg">A casa de madeira da Tibúrcio Cavalcante, no Meireles. Na brasa desde 2000.</p>
+  <figure class="faixa" style="background-image:url(https://static.wixstatic.com/media/404bb8_12f9ebec04d744c3be7153db3744b25d~mv2.jpg/v1/fill/w_1800,h_900,al_c,q_82,enc_auto/sg.jpg)" role="img" aria-label="Fachada de madeira do Santa Grelha Meireles">
+    <figcaption data-t="leg">A casa de madeira da Tibúrcio Cavalcante, no Meireles. Na brasa desde 2000.</figcaption>
   </figure>
 
-  <section id="comanda">
-    <div class="eixo">
-      <h2 data-t="cT">Sua mesa, na comanda</h2>
-      <p class="lead" data-t="cL">Toque em cada linha. Quando a comanda estiver completa, a casa carimba.</p>
-    </div>
+  <section id="comanda" aria-label="Reservar mesa">
     <div class="comanda" id="com">
-      <div class="com-topo"><div class="mono" aria-hidden="true"></div><span id="com-num"></span></div>
+      <div class="com-topo"><div class="mono" aria-hidden="true"></div><b data-t="cT">Comanda</b><span><span data-t="nLbl">reserva nº</span> <i id="com-n"></i><br><span id="com-data"></span></span></div>
       <div id="linhas"></div>
       <button type="button" class="fechar" id="fechar" disabled></button>
-      <div class="carimbo" id="carimbo" aria-hidden="true"><small>Santa Grelha</small><b data-t="res">Reservado</b><small id="carimbo-c"></small></div>
+      <div class="carimbo" id="carimbo" aria-hidden="true"><span class="mono"></span><b data-t="res">Reservado</b><small id="carimbo-c"></small></div>
     </div>
+    <div class="canhoto" id="canhoto" hidden aria-live="polite"></div>
+    <p class="instr" id="instr" data-t="cL">Toque em cada linha. Quando a comanda estiver completa, a casa carimba e você leva o canhoto.</p>
     <div class="pos" id="pos" aria-live="polite"></div>
   </section>
 
@@ -207,6 +223,7 @@ footer p+p{margin-top:6px}
   <p>Santa Grelha, do Grupo Social Clube. <a href="links/">Link da bio</a> &nbsp; <a href="../painel/" data-t="painelL">Painel da equipe</a></p>
   <p data-t="rodape">Protótipo da Timeless. Fotos do site do Grupo Social Clube; horários do Tripadvisor e do Linktree em 24/11/2026.</p>
 </footer>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="tinta"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></svg>
 <div class="ferr"><button type="button" id="b-revisao" aria-pressed="false" data-t="rev">Ver o que corrigimos</button></div>
 
 <script src="marca.js"></script>
@@ -215,7 +232,7 @@ footer p+p{margin-top:6px}
 <script>
 const EN={demo:'Prototype made by Timeless for Santa Grelha. Not the restaurant’s official website.',n1:'Book',n2:'Menu',n3:'Our houses',n4:'Events',
  h1:'Two houses, one fire.',leg:'The wooden house on Tibúrcio Cavalcante, in Meireles. Over the fire since 2000.',
- cT:'Your table, on the check',cL:'Tap each line. When the check is complete, the house stamps it.',res:'Booked',
+ cT:'Check',nLbl:'booking no.',cL:'Tap each line. When the check is complete, the house stamps it and you keep the stub.',res:'Booked',
  mT:'The menu',mL:'Iguatemi menu, prices as of 24 Nov 2026. Meireles may differ.',sigT:'Allergen codes used by the restaurant:',sigL:'The legend will be added when the restaurant sends it.',avisoAlerg:'For allergies, tell the team when you order.',
  kT:'Our houses',kL:'Hours of each Fortaleza house, checked on Tripadvisor and Linktree on 24 Nov 2026.',
  eT:'To celebrate',eL:'Birthdays, weddings, team dinners and celebrations, from 9 guests. The request reaches the team of the house you choose.',
@@ -255,7 +272,8 @@ function escolhas(k){const ds=dias();
 function comanda(){
   document.getElementById('linhas').innerHTML=ORDEM.map(k=>{const v=valor(k),ab=C.aberta===k&&!C.fechada;
     return `<button type="button" class="linha ${ab?'aberta':''}" data-l="${k}" ${C.fechada?'disabled':''} aria-expanded="${ab}"><span class="dt">${L(...ROT[k])}</span><span class="dd ${v?'':'vazio'}">${v?esc(v):L('toque para escolher','tap to choose')}</span></button>${ab?`<div class="escolhas" data-e="${k}">${escolhas(k)}</div>`:''}`;}).join('');
-  const f=document.getElementById('fechar');f.disabled=!completa()||C.fechada;f.textContent=C.fechada?L('Comanda fechada','Check closed'):L('Fechar a comanda','Close the check');
+  const f=document.getElementById('fechar'),falta=ORDEM.filter(k=>!valor(k)).length;f.disabled=!completa()||C.fechada;
+  f.textContent=C.fechada?L('Comanda fechada','Check closed'):falta?L(falta===1?'Falta 1 linha':`Faltam ${falta} linhas`,falta===1?'1 line to go':`${falta} lines to go`):L('Fechar a comanda','Close the check');
   const i=document.querySelector('.escolhas input');if(i)i.focus({preventScroll:true});
 }
 function proxima(){C.aberta=ORDEM.find(k=>!valor(k))||null;comanda();}
@@ -277,11 +295,19 @@ document.getElementById('fechar').addEventListener('click',()=>{
   Reservas.nova({codigo,casa:u.id,criada:new Date().toISOString(),inicio:ini.toISOString(),dia:fmtDia(x),hora:hm(C.hora),pessoas:C.pessoas,ocasiao:'',pedidos:[],obs:'',nome:C.nome.trim(),zap:C.zap,status:grupo?'aguardando':'confirmada',motivos:grupo?[`grupo de ${C.pessoas}`]:[]});
   C.fechada=true;C.aberta=null;comanda();
   document.getElementById('carimbo-c').textContent=codigo;document.getElementById('carimbo').classList.add('on');
+  const fimH=new Date(ini.getTime()+2*3600e3),fz=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}00`;
+  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Santa Grelha//PT\r\nBEGIN:VEVENT\r\nUID:${codigo}@santagrelha\r\nDTSTART;TZID=America/Fortaleza:${fz(ini)}\r\nDTEND;TZID=America/Fortaleza:${fz(fimH)}\r\nSUMMARY:Santa Grelha ${u.nome}, mesa para ${C.pessoas}\r\nLOCATION:${u.end}, Fortaleza\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+  const cn=document.getElementById('canhoto');cn.hidden=false;
+  cn.innerHTML=`<small>${L('Canhoto do cliente','Your stub')}</small><div class="cod">${codigo}</div>
+   <p class="res">${esc(u.nome)}, ${fmtDia(x)}, ${hm(C.hora)}<br>${L(`mesa para ${C.pessoas}, em nome de ${esc(C.nome.trim().split(' ')[0])}`,`table for ${C.pessoas}, for ${esc(C.nome.trim().split(' ')[0])}`)}</p>
+   <div class="acoes"><a download="santa-grelha.ics" href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}">${L('Pôr na agenda','Add to calendar')}</a><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a></div>`;
+  document.getElementById('instr').hidden=true;
   const msg=[`Olá! Reserva no Santa Grelha ${u.nome}.`,`Dia: ${fmtDia(x)}`,`Horário: ${hm(C.hora)}`,`Pessoas: ${C.pessoas}`,`Nome: ${C.nome.trim()}`,`WhatsApp: ${C.zap}`,`Código: ${codigo}`].join('\n');
   document.getElementById('pos').innerHTML=`<p><b>${grupo?L(`Grupo de ${C.pessoas}: a equipe do ${u.nome} confirma pelo WhatsApp.`,`Group of ${C.pessoas}: the ${u.nome} team confirms on WhatsApp.`):L('Mesa reservada.','Table booked.')}</b> <a href="${u.mapa}" target="_blank" rel="noopener">${esc(u.end)}</a></p>
    <p style="margin-top:8px">${L('Reserva de demonstração: nada foi enviado à casa. A ficha apareceu no <a href="../painel/">painel da equipe</a>, neste navegador. No site publicado, a casa recebe esta mensagem:','Demo booking: nothing was sent. It now shows in the <a href="../painel/">team panel</a>, in this browser. On the live site, the restaurant gets:')}</p><div class="msg">${esc(msg)}</div>`;
 });
-document.getElementById('com-num').textContent=L('Comanda de reserva','Booking check');
+const NUM=String(Math.floor(Math.random()*9000)+1000);
+function numera(){const h=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));document.getElementById('com-n').textContent=NUM;document.getElementById('com-data').textContent=`${h.getDate()}/${h.getMonth()+1}`;}
 
 /* ---------- a carta ---------- */
 const alg=i=>(i.alerg||[]).length?`<div class="alg">${L('Alergênicos','Allergens')}: ${i.alerg.map(a=>L(...ALG[a])).join(', ')}</div>`:`<div class="alg">${L('Alergênicos: confirmar com a casa','Allergens: to be confirmed by the restaurant')}</div>`;
@@ -302,7 +328,7 @@ document.getElementById('form-ev').addEventListener('submit',e=>{e.preventDefaul
 
 function tudo(){estados();comanda();cardapio();casas();}
 function aplicaLang(){const bl=document.getElementById('lang');bl.textContent=lang==='en'?'PT':'EN';bl.setAttribute('aria-label',lang==='en'?'Ver em português':'Ver em inglês');document.documentElement.lang=lang==='en'?'en':'pt-BR';
-  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});document.getElementById('com-num').textContent=L('Comanda de reserva','Booking check');tudo();}
+  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});numera();tudo();}
 document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
 const bR=document.getElementById('b-revisao');bR.addEventListener('click',()=>{const on=document.body.classList.toggle('revisao');bR.setAttribute('aria-pressed',on);});
 if(C.casa&&C.dia===null&&horas(dias()[0]).length)C.dia=0;
