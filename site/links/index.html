@@ -9,63 +9,77 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--fundo:#FBFAF8;--tinta:#1B1616;--tinta-2:#5E5555;--sg:#C4161C;--regra:#DDD5D0;--serif:'Bodoni Moda',Didot,serif;--sans:'Raleway',system-ui,sans-serif}
+/* Link da bio: uma ação principal (reservar), o resto em ordem fixa: cardápio, pedir, eventos, como chegar, horário de hoje, avaliações. */
+:root{--fundo:#FBFAF8;--tinta:#1B1616;--tinta-2:#5E5555;--sg:#C4161C;--sg-escuro:#8E0E13;--regra:#DDD5D0;--serif:'Bodoni Moda',Didot,serif;--sans:'Raleway',system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--fundo);color:var(--tinta);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid var(--sg);outline-offset:2px}
 .demo{background:var(--tinta);color:var(--fundo);font-size:13px;text-align:center;padding:7px 12px}
 .pg{max-width:460px;margin:0 auto}
-.topo{background:var(--sg);color:#fff;padding:26px 22px 22px;display:flex;align-items:center;gap:16px}
-.topo img{height:70px}
-.topo p{font-family:var(--serif);font-size:22px;line-height:1.2}
-.casas{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--tinta)}
-.casa{padding:16px 22px 18px;border-right:1px solid var(--regra)}
-.casa:last-child{border-right:0}
-.casa b{display:block;font-family:var(--serif);font-weight:400;font-size:24px}
-.casa .st{display:flex;gap:7px;align-items:center;font-size:13px;color:var(--tinta-2);margin:2px 0 12px}
-.casa .st i{width:8px;height:8px;border-radius:50%;background:var(--sg)}
-.casa .st.off i{background:#b5abab}
-.casa a.res{display:flex;align-items:center;justify-content:center;min-height:48px;background:var(--sg);color:#fff;font-weight:600;font-size:15px}
-h2{font-family:var(--serif);font-weight:400;font-size:20px;padding:26px 22px 6px;color:var(--sg)}
+.topo{background:var(--sg);color:#fff;padding:20px 22px 18px;display:flex;align-items:center;gap:16px}
+.topo img{height:62px;width:auto}
+.topo p{font-family:var(--serif);font-size:21px;line-height:1.2}
+.escolha{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--regra)}
+.escolha button{background:none;border:0;border-bottom:3px solid transparent;text-align:left;padding:12px 22px 10px;cursor:pointer;color:var(--tinta);font:inherit;min-height:64px}
+.escolha button b{display:block;font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.15}
+.escolha button small{display:flex;gap:7px;align-items:center;font-size:13px;color:var(--tinta-2)}
+.escolha button small i{width:8px;height:8px;border-radius:50%;background:var(--sg);flex:none}
+.escolha button small.off i{background:#9C9292}
+.escolha button[aria-pressed=true]{border-bottom-color:var(--sg)}
+.principal{display:flex;align-items:center;justify-content:center;margin:16px 22px 8px;min-height:56px;background:var(--sg);color:#fff;font-weight:600;font-size:17px}
+.principal:hover{background:var(--sg-escuro)}
 .lk{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 22px;padding:14px 0;border-top:1px solid var(--regra);min-height:52px}
+.lk:first-of-type{border-top:0}
 .lk b{font-weight:600}
 .lk small{color:var(--tinta-2);font-size:13px;text-align:right}
 .lk:hover b{color:var(--sg)}
-footer{padding:30px 22px 40px;color:var(--tinta-2);font-size:13px}
+.hoje{display:block;margin:0 22px;padding:14px 0;border-top:1px solid var(--regra)}
+.hoje b{font-weight:600;display:block}
+.hoje span{display:block;font-size:14px;color:var(--tinta-2)}
+footer{padding:26px 22px 40px;color:var(--tinta-2);font-size:13px}
 </style>
 </head>
 <body>
 <div class="demo">Protótipo da Timeless para o Santa Grelha. Não é a página oficial da casa.</div>
 <div class="pg">
   <div class="topo">
-    <img src="https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png" alt="Santa Grelha">
+    <img src="https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png" alt="Santa Grelha" width="85" height="62">
     <p>Duas casas, a mesma brasa.</p>
   </div>
-  <div class="casas" id="casas"></div>
+  <div class="escolha" id="escolha" role="group" aria-label="Escolha a casa"></div>
+  <a class="principal" id="reservar" href="../reservar/">Reservar mesa</a>
 
-  <h2>Cardápio</h2>
-  <a class="lk" href="../#cardapio"><b>Cardápio completo</b><small>com as siglas de alergênico</small></a>
-  <a class="lk" href="../?lang=en#cardapio" lang="en"><b>Menu in English</b><small>for visitors</small></a>
-  <a class="lk" href="../#g5"><b>Criações do Chef</b><small>pratos autorais</small></a>
+  <nav aria-label="Links">
+    <a class="lk" href="../#cardapio"><b>Ver cardápio</b><small>do Iguatemi, com alergênicos</small></a>
+    <a class="lk" href="../?lang=en#cardapio" lang="en"><b>Menu in English</b><small>for visitors</small></a>
+    <a class="lk" href="https://ifoodbr.onelink.me/F4X4/Santagrelha" target="_blank" rel="noopener"><b>Pedir pelo iFood</b><small>delivery</small></a>
+    <a class="lk" href="../#eventos"><b>Eventos e grupos</b><small>aniversário, casamento, empresa</small></a>
+    <a class="lk" href="https://www.google.com/maps/search/?api=1&query=Santa+Grelha+Rua+Tib%C3%BArcio+Cavalcante+790+Fortaleza" target="_blank" rel="noopener"><b>Como chegar ao Meireles</b><small>R. Tibúrcio Cavalcante, 790</small></a>
+    <a class="lk" href="https://www.google.com/maps/search/?api=1&query=Santa+Grelha+Iguatemi+Fortaleza" target="_blank" rel="noopener"><b>Como chegar ao Iguatemi</b><small>Av. Washington Soares, 85, loja 779</small></a>
+    <a class="hoje" href="../#casas"><b>Horário de hoje</b><span id="hoje"></span></a>
+    <a class="lk" id="trip" href="#" target="_blank" rel="noopener"><b>Avaliações no Tripadvisor</b><small>Iguatemi 4,8 · Meireles 4,7</small></a>
+  </nav>
 
-  <h2>Pedir e comemorar</h2>
-  <a class="lk" href="https://ifoodbr.onelink.me/F4X4/Santagrelha" target="_blank" rel="noopener"><b>Pedir pelo iFood</b><small>delivery</small></a>
-  <a class="lk" href="../#eventos"><b>Fazer um evento</b><small>Meireles ou Iguatemi</small></a>
-
-  <h2>Visitar</h2>
-  <a class="lk" href="https://www.google.com/maps/search/?api=1&query=Santa+Grelha+Rua+Tib%C3%BArcio+Cavalcante+790+Fortaleza" target="_blank" rel="noopener"><b>Como chegar ao Meireles</b><small>R. Tibúrcio Cavalcante, 790</small></a>
-  <a class="lk" href="https://www.google.com/maps/search/?api=1&query=Santa+Grelha+Iguatemi+Fortaleza" target="_blank" rel="noopener"><b>Como chegar ao Iguatemi</b><small>Av. Washington Soares, 85</small></a>
-  <a class="lk" href="../"><b>Site da casa</b><small>horários, cardápio, eventos</small></a>
-
-  <footer>Santa Grelha, do Grupo Social Clube. Links conferidos em 24/11/2026.</footer>
+  <footer>Santa Grelha, do Grupo Social Clube. Links e horários conferidos em 24/11/2026. <a href="../" style="text-decoration:underline">Site da casa</a></footer>
 </div>
 <script src="../marca.js"></script>
 <script src="../comum.js"></script>
 <script>
-document.getElementById('casas').innerHTML=MARCA.unidades.map(u=>{const s=estadoUnidade(u),on=s.k==='aberta';
-  const t=on?`Aberta até ${hm(s.ate)}`:s.k==='fechada'?`Abre amanhã às ${hm(s.abre)}`:`Abre às ${hm(s.abre)}`;
-  return `<div class="casa"><b>${u.nome}</b><div class="st ${on?'':'off'}"><i aria-hidden="true"></i>${t}</div><a class="res" href="../reservar/?casa=${u.id}">Reservar</a></div>`;}).join('');
+const CH=MARCA.id+'-casa';
+let casa=(()=>{try{return localStorage.getItem(CH)}catch(e){return null}})();
+if(!unidade(casa))casa=MARCA.unidades[0].id;
+const est=u=>{const s=estadoUnidade(u);return {on:s.k==='aberta',t:s.k==='aberta'?`Aberta agora, até ${hm(s.ate)}`:s.k==='fechada'?`Fechada. Abre amanhã às ${hm(s.abre)}`:s.k==='pausa'?`Volta às ${hm(s.abre)}`:`Abre hoje às ${hm(s.abre)}`};};
+function pinta(){
+  document.getElementById('escolha').innerHTML=MARCA.unidades.map(u=>{const e=est(u);
+    return `<button type="button" data-c="${u.id}" aria-pressed="${u.id===casa}"><b>${u.nome}</b><small class="${e.on?'':'off'}"><i aria-hidden="true"></i>${e.t}</small></button>`;}).join('');
+  const u=unidade(casa),r=document.getElementById('reservar');
+  r.href=`../reservar/?casa=${u.id}`; r.textContent=`Reservar mesa no ${u.nome}`;
+  document.getElementById('hoje').innerHTML=MARCA.unidades.map(x=>`${x.nome}: ${est(x).t.toLowerCase()}`).join('<br>');
+}
+document.getElementById('escolha').addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;casa=b.dataset.c;try{localStorage.setItem(CH,casa)}catch(e){}pinta();});
+document.getElementById('trip').href=MARCA.trip;
+pinta(); setInterval(pinta,60000);
 </script>
 </body>
 </html>
