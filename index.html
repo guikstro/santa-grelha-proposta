@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Santa Grelha · proposta da Timeless</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Santa Grelha · proposta da Timeless">
+<meta property="og:description" content="Proposta para o Santa Grelha: link da bio, site, reserva por unidade e painel da equipe, para as duas casas de Fortaleza.">
+<meta property="og:image" content="https://static.wixstatic.com/media/404bb8_12f9ebec04d744c3be7153db3744b25d~mv2.jpg/v1/fill/w_2000,h_1300,al_c,q_82,enc_auto/sg.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
@@ -85,6 +90,23 @@ p + p{margin-top:12px}
 .zap{display:inline-flex;align-items:center;min-height:64px;padding:0 30px;background:var(--acento);color:var(--acento-txt);text-decoration:none;font-size:20px;font-weight:600;margin:10px 0 40px}
 .assina{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--regra);font-size:15px;color:var(--tinta-2)}
 .assina img{height:30px}
+.ganhos{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;border-top:2px solid var(--tinta);padding-top:20px}
+.ganhos b{display:block;font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.3;margin-bottom:6px}
+.ganhos span{color:var(--tinta-2);font-size:16px}
+.calc{grid-column:1/-1;margin-top:14px;padding:18px 20px;background:var(--fundo-2)}
+.plano.rec .calc{background:var(--fundo)}
+.calc h5{font-family:var(--serif);font-weight:600;font-size:19px;margin-bottom:4px}
+.calc .mut{font-size:15px}
+.calc .campos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:12px}
+.calc label{display:grid;gap:2px;font-size:14px;color:var(--tinta-2);align-content:end}
+.calc input{background:transparent;border:0;border-bottom:2px solid var(--tinta);font:400 18px var(--sans);color:var(--tinta);padding:6px 2px;min-height:44px;width:100%;border-radius:0}
+.calc .res{margin-top:14px;font-size:16px;font-variant-numeric:tabular-nums}
+.calc .res div{display:flex;justify-content:space-between;gap:16px;padding:6px 0;border-top:1px solid var(--regra)}
+.calc .res div:last-child{font-weight:600}
+.calc button{background:none;border:0;font:500 15px var(--sans);color:var(--tinta);text-decoration:underline;text-underline-offset:4px;cursor:pointer;min-height:44px;padding:0}
+.prazo{display:block;font-size:14px;color:var(--tinta-2);margin-top:4px}
+.prova{margin-top:30px;padding:16px 20px;background:var(--fundo-2);font-size:16px}
+.prova b{font-family:var(--serif);font-weight:600}
 .flutua{position:fixed;right:18px;bottom:18px;z-index:9;background:var(--acento);color:var(--acento-txt);text-decoration:none;font-weight:600;min-height:52px;display:none;align-items:center;padding:0 20px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 @media (max-width:880px){
   .folha{padding:64px 22px} .capa .base{padding:32px 22px}
@@ -94,19 +116,21 @@ p + p{margin-top:12px}
   .tela{height:300px} .tela iframe{transform:scale(.33)}
   .plano{grid-template-columns:1fr} .plano .val{text-align:left} .inclui{grid-template-columns:1fr;gap:18px}
   .enderecos div{grid-template-columns:1fr;gap:2px} .enderecos em{text-align:left}
+  .ganhos{grid-template-columns:1fr;gap:18px} .calc .campos{grid-template-columns:1fr 1fr}
 }
 @media print{
   @page{size:A4;margin:0}
-  body{font-size:15px} .flutua{display:none!important} .abrir{display:none}
+  body{font-size:15px} .flutua{display:none!important} .abrir{display:none} .so-tela{display:none}
   .folha{max-width:none;height:297mm;overflow:hidden;padding:22mm 18mm;border:0;break-after:page}
   .capa{min-height:297mm;break-after:page} .capa .base{width:62%}
   .caminho{grid-template-columns:repeat(4,1fr)} .vivo{grid-template-columns:auto 1fr} .site .vivo{grid-template-columns:1fr 1fr}
   .tela{height:470px} .tela iframe{transform:scale(.48)}
   h3{font-size:38px;margin-bottom:14px} .folha .texto.mut{font-size:14px}
   .achado{padding:11px 0;gap:24px;grid-template-columns:1fr 2.2fr} .achado b{font-size:18px} .achado p{font-size:13px;line-height:1.5}
-  .miudos{margin-top:18px} .miudo{padding:5px 0;font-size:12.5px} .miudo .onde{font-size:11.5px} .elogio{font-size:15px;margin-top:16px;padding:12px 16px}
+  .miudos{margin-top:18px} .miudo{padding:5px 0;font-size:12.5px} .miudo .onde{font-size:11.5px} .elogio{font-size:13px;line-height:1.4;margin-top:10px;padding:8px 12px} .notas li{padding:9px 0} .notas b{font-size:16px} .notas span{font-size:13px} .achado .fonte{font-size:11.5px;margin-top:4px}
   .folha.conta-folha{height:auto;min-height:0;overflow:visible}
   .plano{break-inside:avoid;padding:16px 0} .plano:last-child{break-before:page;margin-top:22mm}
+  .calc{display:none} .ganhos b{font-size:16px} .ganhos span{font-size:13px}
   .vem li{font-size:13px;padding:4px 0 4px 20px} .vem li::before{top:12px} .plano h4,.plano .val{font-size:24px} .inclui{break-inside:avoid}
 }
 
@@ -118,7 +142,7 @@ p + p{margin-top:12px}
   <div></div>
   <div class="base">
     <img class="wm" src="https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png" alt="Santa Grelha">
-    <h1>Vinte e cinco anos de brasa merecem um caminho à altura até a mesa.</h1>
+    <h1>Vinte e seis anos de brasa merecem um caminho à altura até a mesa.</h1>
     <div class="por"><span>Proposta de Guilherme Castro<br>Fortaleza, 24 de novembro de 2026</span><img src="assets/timeless.png" alt="Timeless"></div>
   </div>
 </header>
@@ -127,16 +151,22 @@ p + p{margin-top:12px}
   <h2>Entrada</h2>
   <h3>O que está na mesa hoje</h3>
   <p class="texto mut">Abrimos o Instagram, o Linktree, o cardápio digital, o site santagrelha.com.br e o Tripadvisor das duas casas em 24/11/2026.</p>
-  <div style="margin-top:32px"><div class="achado"><div><b>O Linktree manda o Meireles para os Estados Unidos.</b><div class="fonte">Linktree, unidade Meireles</div></div><p>O botão “Localização” da casa da Tibúrcio Cavalcante mostra “831 Lancaster Dr NE, Salem, OR, USA”. E o título da seção está escrito “Santa Gelha Meireles”. São 49,3 mil seguidores passando por essa página.</p></div><div class="achado"><div><b>O botão do cardápio no site leva a um erro.</b><div class="fonte">santagrelha.com.br</div></div><p>“Ver cardápio digital” abre digitalmenu.com.br/santagrelha, que responde “Menu Digital não encontrado”. E a frase que o Google mostra embaixo do site é a padrão do WordPress: “Só mais um site WordPress”.</p></div><div class="achado"><div><b>Os alergênicos estão em código, sem a chave.</b><div class="fonte">cardápio digital e Linktree</div></div><p>O cardápio marca os pratos com LE, CO e CR, mas não diz o que cada sigla significa. A legenda existe num item do Linktree que não aparece para o público. O polvo e o bolinho de bacalhau não têm sigla nenhuma.</p></div></div>
-  <div class="miudos"><h4>E os detalhes que pouca gente vê</h4><div class="miudo"><span>Cortes para compartilhar de R$ 145 a R$ 239 sem peso nem número de pessoas. O Wagyu, a R$ 410, também.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>O Tripadvisor do Meireles diz “Apenas dinheiro” e “Aceita cartões de crédito” ao mesmo tempo.</span><span class="onde">Tripadvisor</span></div><div class="miudo"><span>As 15 respostas recentes no Tripadvisor usam dois textos prontos.</span><span class="onde">Tripadvisor</span></div><div class="miudo"><span>“CRÈME BRÙLÉE” com acento trocado, e “créme brûlée” de outro jeito na mesma página. “TORNEDOR”, “Burguer SG”.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>“Criações do Chef” no cardápio e “Criações da Chef” no site; as fotos do cardápio no site são de dezembro de 2020.</span><span class="onde">site e cardápio</span></div></div>
+  <div style="margin-top:32px"><div class="achado"><div><b>O Linktree manda o Meireles para os Estados Unidos.</b><div class="fonte">Linktree, unidade Meireles. Visto em 24/11/2026</div></div><p>O botão “Localização” da casa da Tibúrcio Cavalcante mostra “831 Lancaster Dr NE #15, Salem”, nos Estados Unidos. E o título da seção está escrito “Santa Gelha Meireles”. Quase 50 mil seguidores têm esse link na bio.</p></div><div class="achado"><div><b>O botão do cardápio no site leva a um erro.</b><div class="fonte">santagrelha.com.br, 24/11/2026</div></div><p>“Ver cardápio digital” abre digitalmenu.com.br/santagrelha, que responde “Menu Digital não encontrado”. E a frase que o Google mostra embaixo do site é a padrão do WordPress: “Só mais um site WordPress”.</p></div><div class="achado"><div><b>Os alergênicos estão em código, sem a chave.</b><div class="fonte">cardápio digital e Linktree, 24/11/2026</div></div><p>O cardápio marca os pratos com LE, CO e CR, mas não diz o que cada sigla significa. A legenda existe num item do Linktree que não aparece para o público. O polvo e o bolinho de bacalhau não têm sigla nenhuma.</p></div></div>
+  <div class="miudos"><h4>E os detalhes que pouca gente vê</h4><div class="miudo"><span>Os cortes para compartilhar, de R$ 145 a R$ 239, não informam peso nem para quantas pessoas servem.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>O Tripadvisor do Meireles diz “Apenas dinheiro” e “Aceita cartões de crédito” ao mesmo tempo.</span><span class="onde">Tripadvisor</span></div><div class="miudo"><span>As 15 respostas recentes no Tripadvisor usam dois textos prontos.</span><span class="onde">Tripadvisor</span></div><div class="miudo"><span>“CRÈME BRÙLÉE” com acento trocado, e “créme brûlée” de outro jeito na mesma página. “TORNEDOR”, “Burguer SG”.</span><span class="onde">cardápio digital</span></div><div class="miudo"><span>“Criações do Chef” no cardápio e “Criações da Chef” no site; as fotos do cardápio no site são de dezembro de 2020.</span><span class="onde">site e cardápio</span></div></div>
+  <p class="elogio">O que já funciona: no Tripadvisor, o Iguatemi tem nota 4,8 com 2.598 avaliações e é o nº 1 de 3.346 restaurantes em Fortaleza; o Meireles tem 4,7 com 2.503. Tripadvisor, 24/11/2026.</p>
 </section>
 
 <section class="folha">
   <h2>Prato principal</h2>
   <h3>O caminho que proponho</h3>
-  <p class="texto mut">Hoje são dois Linktrees de casa num só, um site com cardápio quebrado e o cardápio de verdade em outra plataforma. A proposta é uma porta só, com as duas casas dentro.</p>
-  <ol class="caminho"><li><b>Instagram</b><span>49,3 mil seguidores tocam no link da bio.</span></li><li><b>As duas casas</b><span>Meireles e Iguatemi lado a lado, cada uma dizendo se está aberta agora.</span></li><li><b>Reserva na casa</b><span>Escolhe a unidade, o dia e o horário, sem sair do Santa Grelha.</span></li><li><b>Painel por unidade</b><span>Cada equipe vê as suas reservas; a direção vê as duas.</span></li></ol>
+  <p class="texto mut">Hoje cada casa tem o seu bloco de links dentro de um Linktree só, e o site e o cardápio de pedidos estão em outro lugar. A proposta é uma porta só, com as duas casas de Fortaleza dentro.</p>
+  <ol class="caminho"><li><b>Instagram</b><span>Quase 50 mil seguidores têm esse link na bio.</span></li><li><b>As duas casas</b><span>Meireles e Iguatemi lado a lado, cada uma dizendo se está aberta agora.</span></li><li><b>Reserva na casa</b><span>Escolha a unidade, o dia e o horário, sem sair do Santa Grelha.</span></li><li><b>Painel por unidade</b><span>Cada equipe vê as suas reservas; a direção vê as duas.</span></li></ol>
   <p class="fica">O GetIn e o iFood podem continuar por trás. O que muda é a porta de entrada, que volta a ser do Santa Grelha, com o endereço certo.</p>
+  <ul class="ganhos">
+    <li><b>O contato do cliente fica com a casa</b><span>Quem reserva ou pede pelo site deixa nome e WhatsApp com o Santa Grelha, e não só dentro do aplicativo de outra empresa.</span></li>
+    <li><b>O pedido direto custa menos</b><span>Reserva e pedido pelo canal da casa não pagam a comissão do aplicativo. A conta, com os números de vocês, está no plano Canal direto.</span></li>
+    <li><b>A informação certa em todo lugar</b><span>Horário, endereço e cardápio iguais no site, na bio e no perfil do Google, que o dono do perfil alinha com a gente.</span></li>
+  </ul>
 </section>
 
 <section class="folha">
@@ -144,7 +174,7 @@ p + p{margin-top:12px}
   <h3>O link da bio</h3>
   <div class="vivo">
     <div class="cel"><iframe src="site/links/" title="Protótipo do link da bio" loading="lazy"></iframe></div>
-    <div><ul class="notas"><li><b>As duas casas, com o estado de agora</b><span>“Aberta até 22h” ou “Abre às 11h30”, para Meireles e Iguatemi.</span></li><li><b>Reserva direto na unidade</b><span>Cada botão já abre a reserva da casa escolhida.</span></li><li><b>O endereço certo</b><span>O Meireles volta para a Tibúrcio Cavalcante, não para o Oregon.</span></li><li><b>Sem página de terceiros</b><span>Sai o Linktree, entra o endereço do Santa Grelha.</span></li></ul><a class="abrir" href="site/links/">Abrir o link da bio</a></div>
+    <div><ul class="notas"><li><b>As duas casas, com o estado de agora</b><span>“Aberta até 22h” ou “Abre às 11h30”, para Meireles e Iguatemi.</span></li><li><b>Um botão principal: reservar</b><span>O cliente escolhe a casa num toque e reserva. Cardápio, iFood, eventos e endereços vêm logo abaixo.</span></li><li><b>O endereço certo</b><span>O Meireles volta para a Tibúrcio Cavalcante, não para o Oregon.</span></li><li><b>Sem página de terceiros</b><span>Sai o Linktree, entra o endereço do Santa Grelha.</span></li></ul><a class="abrir" href="site/links/">Abrir o link da bio</a></div>
   </div>
 </section>
 
@@ -152,16 +182,17 @@ p + p{margin-top:12px}
   <h2>Segundo acompanhamento</h2>
   <h3>O site, a reserva e o painel</h3>
   <div class="tela"><iframe src="site/" title="Protótipo do site" loading="lazy" tabindex="-1"></iframe></div>
-  <div class="vivo"><ul class="notas"><li><b>Duas portas na primeira tela</b><span>Meireles, a casa de madeira, e Iguatemi, nº 1 do Tripadvisor em Fortaleza.</span></li><li><b>O cardápio de verdade</b><span>Os pratos do cardápio digital, com preço do dia, em português e inglês.</span></li></ul><ul class="notas"><li><b>Siglas à vista e a legenda no lugar</b><span>LE, CO e CR aparecem em cada prato, e a legenda entra quando a casa mandar.</span></li><li><b>Reserva por unidade, com triagem</b><span>Comum confirma na hora; grupo grande ou pedido especial vai para a equipe da casa.</span></li></ul></div>
-  <a class="abrir" href="site/">Abrir o site</a><a class="abrir" href="site/reservar/">Testar a reserva</a><a class="abrir" href="painel/">Ver o painel da equipe</a>
+  <div class="vivo"><ul class="notas"><li><b>Duas portas na primeira tela</b><span>Meireles, a casa de madeira, e Iguatemi, nº 1 do Tripadvisor em Fortaleza.</span></li><li><b>O cardápio do Iguatemi, com o Menu Executivo</b><span>Os pratos do cardápio digital do Iguatemi, com preço, em português e inglês. O do Meireles entra quando a casa mandar.</span></li></ul><ul class="notas"><li><b>Alergênicos ao lado de cada prato</b><span>As siglas que a casa usa aparecem no nome do prato; a marcação completa entra depois de conferida com a cozinha.</span></li><li><b>Reserva por unidade, com confirmação da equipe</b><span>Reserva comum confirma na hora; grupo grande ou pedido especial vai para a equipe da casa confirmar.</span></li></ul></div>
+  <a class="abrir" href="site/">Abrir o site</a><a class="abrir" href="site/reservar/">Testar a reserva (demonstração, nada é enviado)</a><a class="abrir" href="painel/">Ver o painel (abre neste aparelho)</a>
+  <p class="texto mut so-tela" style="margin-top:14px;font-size:15px">A reserva de teste e o painel conversam só dentro do mesmo navegador: faça uma reserva e abra o painel no mesmo aparelho para ver a ficha chegar.</p>
 </section>
 
 <section class="folha">
   <h2>Como fica no ar</h2>
   <h3>Cada peça no seu endereço</h3>
   <p class="texto mut">Para mostrar, juntamos tudo num link só. Publicado, cada parte tem o seu endereço e o seu público.</p>
-  <div class="enderecos"><div><b>santagrelha.com.br</b><span>O site novo, no domínio que já é de vocês.</span><em>clientes</em></div><div><b>santagrelha.com.br/links</b><span>O link da bio do Instagram.</span><em>quem vem do Instagram</em></div><div><b>santagrelha.com.br/reservar</b><span>A reserva em passos, por unidade.</span><em>clientes</em></div><div><b>painel.santagrelha.com.br</b><span>Reservas de cada casa, fichas e relatório do mês. Com login.</span><em>equipes do Meireles e do Iguatemi</em></div></div>
-  <p class="fica">O cliente nunca vê o painel, e cada casa vê só as próprias reservas.</p>
+  <div class="enderecos"><div><b>santagrelha.com.br</b><span>O site novo, no domínio que já é de vocês.</span><em>clientes</em></div><div><b>santagrelha.com.br/links</b><span>O link da bio do Instagram.</span><em>quem vem do Instagram</em></div><div><b>santagrelha.com.br/reservar</b><span>A reserva em passos, por unidade.</span><em>clientes</em></div><div><b>painel.santagrelha.com.br</b><span>Reservas de cada casa, a ficha de cada reserva e o relatório do mês. Com login.</span><em>equipes do Meireles e do Iguatemi</em></div></div>
+  <p class="fica">O cliente nunca vê o painel. Na versão final, cada casa entra com login e vê só as próprias reservas.</p>
 </section>
 
 <section class="folha conta-folha">
@@ -169,18 +200,30 @@ p + p{margin-top:12px}
   <h3>Três formas de servir</h3>
   <p class="texto mut">Os valores são para a marca, com as duas casas de Fortaleza no mesmo site.</p>
   <div class="conta">
-    <div class="plano"><h4>Biolink</h4><div class="val">R$ 590<small>e R$ 99 por mês</small></div>
-      <p>Para trocar o Linktree por uma página da casa, com as duas unidades.</p><ul class="vem"><li>Página de links no domínio santagrelha.com.br, com o vermelho e o monograma da casa</li><li>Meireles e Iguatemi lado a lado, cada um com o estado de agora</li><li>O endereço do Meireles corrigido e o nome escrito certo</li><li>Cardápio, menu em inglês, eventos e iFood em ordem</li><li>Painel com os toques em cada botão, todo mês</li></ul></div>
-    <div class="plano rec"><h4>Site da casa<span class="sug">sugestão da casa</span></h4><div class="val">R$ 1.490<small>e R$ 189 por mês</small></div>
-      <p>Para o Santa Grelha ser achado no Google com a informação certa e o cardápio que funciona.</p><ul class="vem"><li class="tudo">Tudo do Biolink, mais:</li><li>Site novo em santagrelha.com.br, no lugar do WordPress atual, em português e inglês</li><li>Duas portas na primeira tela, com horário e estado de cada casa</li><li>Cardápio completo, que a casa edita sozinha, com siglas e legenda</li><li>Revisão da carta com a cozinha: correções e alergênicos que faltam</li><li>Reserva em passos por unidade, com confirmação e lembrete pelo WhatsApp</li><li>Painel por unidade: reservas para confirmar, fichas e código</li><li>Página de eventos que entrega o pedido pronto à equipe da casa</li><li>Horário, endereço e cardápio iguais no Google, no Instagram e no Tripadvisor</li><li>Relatório do mês: visitas, reservas e de onde veio cada pessoa</li></ul></div>
-    <div class="plano"><h4>Canal direto</h4><div class="val">R$ 2.890<small>e R$ 329 por mês</small></div>
-      <p>Para vender parte do delivery sem pagar comissão a cada pedido.</p><ul class="vem"><li class="tudo">Tudo do Site da casa, mais:</li><li>Pedido direto pelo site, que chega pronto no WhatsApp da casa</li><li>Lista de clientes das duas casas, com consentimento</li><li>Cupom de volta para quem pediu direto</li><li>Relatório com pedidos, ticket médio e o que mais sai</li></ul></div>
+    <div class="plano"><h4>Página de links</h4><div class="val">R$ 590<small>de implantação + R$ 99 por mês</small><span class="prazo">no ar em 5 dias úteis</span></div>
+      <p>O link da bio do Instagram. Para trocar o Linktree por uma página da casa, com as duas unidades de Fortaleza.</p><ul class="vem"><li>Página de links no domínio santagrelha.com.br, com o vermelho e o monograma da casa</li><li>Meireles e Iguatemi lado a lado, cada um com o estado de agora</li><li>O endereço do Meireles corrigido e o nome escrito certo</li><li>Cardápio, menu em inglês, eventos e iFood em ordem</li><li>Painel com os toques em cada botão, todo mês</li></ul></div>
+    <div class="plano rec"><h4>Site da casa<span class="sug">recomendado</span></h4><div class="val">R$ 1.490<small>de implantação + R$ 189 por mês</small><span class="prazo">no ar em 15 dias úteis</span></div>
+      <p>Para o Santa Grelha ser achado no Google com a informação certa e o cardápio que funciona.</p><ul class="vem"><li class="tudo">Tudo da Página de links, mais:</li><li>Site novo em santagrelha.com.br, no lugar do WordPress atual, em português e inglês</li><li>Duas portas na primeira tela, com horário e estado de cada casa</li><li>Cardápio completo, que a casa edita sozinha, com espaço para marcar os alergênicos de cada prato</li><li>O Menu Executivo de segunda a quinta em destaque</li><li>Revisão da carta com a cozinha: correções e alergênicos que faltam</li><li>Reserva em passos por unidade, com confirmação e lembrete pelo WhatsApp</li><li>Painel por unidade: reservas para confirmar, a ficha de cada reserva e o código</li><li>Página de eventos que entrega o pedido pronto à equipe da casa</li><li>Horário, endereço e cardápio alinhados com o perfil do Google da casa (o dono do perfil dá o acesso), o Instagram e o Tripadvisor</li><li>Relatório do mês: visitas, reservas e de onde veio cada pessoa</li></ul></div>
+    <div class="plano"><h4>Canal direto</h4><div class="val">R$ 2.890<small>de implantação + R$ 329 por mês</small><span class="prazo">no ar em 25 dias úteis</span></div>
+      <p>Para vender parte do delivery pelo canal da casa, sem a comissão do aplicativo. A taxa do meio de pagamento continua.</p><ul class="vem"><li class="tudo">Tudo do Site da casa, mais:</li><li>Pedido direto pelo site, que chega pronto no WhatsApp da casa</li><li>Lista de clientes das duas casas, com consentimento</li><li>Cupom de volta para quem pediu direto</li><li>Relatório com pedidos, valor médio por pedido e o que mais sai</li></ul>
+      <div class="calc" id="calc">
+        <h5>Faça a conta com os números de vocês</h5>
+        <p class="mut">Os campos começam vazios. Preencha com os números da casa; nada é enviado.</p>
+        <div class="campos">
+          <label>Pedidos por mês que passariam para o canal direto<input id="c-ped" inputmode="numeric" placeholder="ex.: 300"></label>
+          <label>Valor médio por pedido (R$)<input id="c-val" inputmode="decimal" placeholder="ex.: 90"></label>
+          <label>Comissão do aplicativo hoje (%)<input id="c-com" inputmode="decimal" placeholder="do contrato"></label>
+          <label>Taxa do meio de pagamento (%)<input id="c-tax" inputmode="decimal" placeholder="da maquininha"></label>
+        </div>
+        <div class="res" id="c-res" aria-live="polite"></div>
+        <button type="button" id="c-ex">Preencher com um exemplo (números fictícios)</button>
+      </div></div>
   </div>
   <div class="inclui">
-    <div><b>Toda mensalidade inclui</b><span>Hospedagem, domínio, certificado de segurança, suporte pelo WhatsApp e até 4 ajustes de conteúdo por mês, como trocar um preço ou a oferta da semana.</span></div>
+    <div><b>Toda mensalidade inclui</b><span>Hospedagem, configuração do domínio santagrelha.com.br (que já é de vocês), certificado de segurança, suporte pelo WhatsApp e até 4 ajustes de conteúdo por mês. Conta como ajuste trocar um preço, uma foto, um horário ou um prato. Não conta criar uma seção ou uma página nova.</span></div>
     <div><b>Fica de fora</b><span>Mídia paga, sessão de fotos, taxas de meios de pagamento e mudanças de layout. Esses itens são orçados à parte.</span></div>
   </div>
-  <p class="rodape-conta">A nota é emitida pelo MEI de Guilherme Castro; a Timeless assina o trabalho.</p>
+  <p class="rodape-conta">Os prazos contam a partir da aprovação dos textos e das fotos. Esta proposta vale por 7 dias, até 1º de dezembro de 2026.</p>
 </section>
 
 <section class="folha">
@@ -188,13 +231,27 @@ p + p{margin-top:12px}
   <h3>Quinze minutos, com o cardápio aberto</h3>
   <p class="texto mut">Levo o protótipo no celular e corrigimos juntos o que estiver diferente da casa. As fotos são do site do Grupo Social Clube; para publicar, usamos as que vocês aprovarem.</p>
   <p class="texto mut">O que encontramos aqui conversa com o Ryori e a Carbone, do mesmo grupo. A estrutura de duas casas num site só vale para as três marcas.</p>
-  <a class="zap" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme.%20Vi%20a%20proposta%20para%20o%20Santa%20Grelha." target="_blank" rel="noopener">Conversar no WhatsApp</a>
+  <p class="texto mut">A prova está neste documento: o link da bio, o site, a reserva e o painel funcionam no celular de vocês, com o cardápio e os horários das duas casas.</p>
+  <a class="zap" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme!%20Vi%20a%20proposta%20do%20Santa%20Grelha%20e%20queria%20conversar." target="_blank" rel="noopener">Conversar no WhatsApp</a>
   <div class="assina"><span>Guilherme Castro<br>(85) 99424-1988</span><img src="assets/timeless.png" alt="Timeless"></div>
 </section>
 <script>
+(()=>{const $=i=>document.getElementById(i),n=i=>parseFloat(($(i).value||'').replace(/\./g,'').replace(',','.')),
+ brl=v=>'R$ '+Math.round(v).toLocaleString('pt-BR'),MENS=329;
+ function conta(){const p=n('c-ped'),v=n('c-val'),c=n('c-com'),t=n('c-tax'),r=$('c-res');
+  if([p,v,c,t].some(x=>!isFinite(x))){r.innerHTML='';return;}
+  const venda=p*v,com=venda*c/100,tax=venda*t/100,fica=com-tax-MENS;
+  r.innerHTML=`<div><span>Comissão do aplicativo sobre esses pedidos</span><span>${brl(com)} por mês</span></div>
+  <div><span>No canal direto: taxa do meio de pagamento</span><span>− ${brl(tax)}</span></div>
+  <div><span>Mensalidade do Canal direto</span><span>− ${brl(MENS)}</span></div>
+  <div><span>${fica>=0?'Fica com a casa':'Com esses números, o canal direto custa mais'}</span><span>${brl(Math.abs(fica))} por mês</span></div>`;}
+ ['c-ped','c-val','c-com','c-tax'].forEach(i=>$(i).addEventListener('input',conta));
+ $('c-ex').addEventListener('click',()=>{$('c-ped').value='300';$('c-val').value='90';$('c-com').value='23';$('c-tax').value='3';conta();
+  $('c-res').insertAdjacentHTML('beforeend','<p class="mut" style="font-size:14px;margin-top:8px">Exemplo com números fictícios, só para mostrar a conta. Troque pelos da casa.</p>');});
+})();
 const fl=()=>document.querySelector('.flutua').style.display=scrollY>innerHeight*.6?'flex':'none';
 addEventListener('scroll',fl,{passive:true});
 </script>
-<a class="flutua" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme.%20Vi%20a%20proposta%20para%20o%20Santa%20Grelha." target="_blank" rel="noopener">WhatsApp</a>
+<a class="flutua" href="https://wa.me/5585994241988?text=Ol%C3%A1%2C%20Guilherme!%20Vi%20a%20proposta%20do%20Santa%20Grelha%20e%20queria%20conversar." target="_blank" rel="noopener">WhatsApp</a>
 </body>
 </html>
