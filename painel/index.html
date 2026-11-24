@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel da equipe · Santa Grelha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#9C9292;--acento:#C4161C;--acento-txt:#fff;--regra:#DDD5D0;
+  --serif:'Bodoni Moda',Didot,serif;--sans:'Raleway',system-ui,sans-serif;--peso-titulo:400;--borda:2px;--raio:0;--logo-filtro:invert(1);--logo-blend:multiply}
+/* Área interna: mais densa que o site, com a mesma marca. */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fundo);color:var(--tinta);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+.demo{background:var(--tinta);color:var(--fundo);font-size:13px;text-align:center;padding:7px 16px}
+header{display:flex;align-items:center;gap:18px;padding:14px 28px;border-bottom:2px solid var(--tinta);flex-wrap:wrap}
+header img{height:38px;filter:var(--logo-filtro);mix-blend-mode:var(--logo-blend)}
+header h1{font-family:var(--serif);font-weight:var(--peso-titulo);font-size:20px}
+header .quem{margin-left:auto;font-size:14px;color:var(--tinta-2)}
+main{max-width:1100px;margin:0 auto;padding:28px}
+.numeros{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--tinta);border-bottom:1px solid var(--regra);margin-bottom:28px}
+.numeros div{padding:14px 16px 14px 0}
+.numeros b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1}
+.numeros span{font-size:14px;color:var(--tinta-2)}
+.numeros .alerta b{color:var(--acento)}
+.barra{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.filtro{display:flex;border:2px solid var(--tinta);border-radius:var(--raio);overflow:hidden;max-width:100%;overflow-x:auto}
+.filtro button{background:none;border:0;font:500 15px var(--sans);min-height:44px;padding:0 16px;cursor:pointer;color:var(--tinta);white-space:nowrap}
+.filtro button[aria-pressed=true]{background:var(--tinta);color:var(--fundo)}
+.ficha{display:grid;grid-template-columns:110px 1fr auto;gap:8px 24px;padding:18px 0;border-top:1px solid var(--regra);align-items:start}
+.ficha .quando b{display:block;font-family:var(--serif);font-size:24px;line-height:1}
+.ficha .quando span{font-size:13px;color:var(--tinta-2)}
+.ficha .casa{font-size:12px;font-weight:500;color:var(--fundo);background:var(--tinta);padding:1px 7px;display:inline-block;margin-top:6px;border-radius:var(--raio)}
+.ficha .quem b{font-weight:500;font-size:17px}
+.ficha .quem small{color:var(--tinta-2);margin-left:6px}
+.ficha .det{font-size:15px;color:var(--tinta-2);margin-top:2px}
+.ficha .triagem{font-size:14px;color:var(--acento);margin-top:6px}
+.ficha .cod{font-size:13px;color:var(--tinta-2);letter-spacing:.03em;margin-top:6px}
+.estado{font-size:13px;font-weight:500;padding:3px 0;text-align:right}
+.estado.aguardando{color:var(--acento)}
+.estado.confirmada{color:#2F5B3A}
+.estado.cancelada{color:var(--tinta-2);text-decoration:line-through}
+.acoes{display:flex;gap:8px;margin-top:8px;justify-content:flex-end;flex-wrap:wrap}
+.acoes button,.acoes a{font:500 14px var(--sans);min-height:40px;padding:0 14px;border:2px solid var(--tinta);border-radius:var(--raio);background:none;color:var(--tinta);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.acoes .sim{background:var(--tinta);color:var(--fundo)}
+.exemplo{font-size:12px;color:var(--tinta-2);border:1px solid var(--regra);padding:0 6px;margin-left:8px}
+.vazio{padding:40px 0;border-top:1px solid var(--regra);color:var(--tinta-2)}
+.rodape{margin-top:34px;padding-top:14px;border-top:1px solid var(--regra);font-size:14px;color:var(--tinta-2);max-width:70ch}
+@media (max-width:760px){main{padding:18px}.numeros{grid-template-columns:1fr 1fr}.ficha{grid-template-columns:72px 1fr}.ficha .lado{grid-column:1/-1}.estado,.acoes{text-align:left;justify-content:flex-start}header{padding:12px 18px}}
+</style>
+</head>
+<body>
+<div class="demo">Protótipo do painel da equipe. No ar, esta área tem login e cada unidade vê as suas reservas.</div>
+<header><img id="logo" alt=""><h1>Reservas</h1><span class="quem" id="hoje"></span></header>
+<main>
+  <div class="numeros" id="numeros"></div>
+  <div class="barra">
+    <div class="filtro" role="group" aria-label="Casa" id="f-casa"></div>
+    <div class="filtro" role="group" aria-label="Situação" id="f-status">
+      <button type="button" data-f="todas" aria-pressed="true">Todas</button>
+      <button type="button" data-f="aguardando" aria-pressed="false">Para confirmar</button>
+      <button type="button" data-f="confirmada" aria-pressed="false">Confirmadas</button>
+    </div>
+  </div>
+  <div id="lista"></div>
+  <p class="rodape">As reservas feitas em <a href="../site/reservar/">site/reservar</a> aparecem aqui na hora (neste protótipo, só no mesmo navegador). Reserva comum já entra confirmada. Grupo a partir de 6 pessoas ou com pedido especial entra como “para confirmar”, e a equipe da unidade responde pelo WhatsApp. O código é só para a equipe localizar a reserva.</p>
+</main>
+<script src="../site/marca.js"></script>
+<script src="../site/comum.js"></script>
+<script>
+lang='pt';
+const base=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Fortaleza'}));
+const dd=(k,h,m)=>{const x=new Date(base);x.setDate(base.getDate()+k);x.setHours(h,m,0,0);return x;};
+const fd=x=>`${DIAS[x.getDay()]}, ${x.getDate()}/${x.getMonth()+1}`;
+let exemplos=(MARCA.exemplos||[]).map((e,i)=>{const x=dd(e.k,e.h,e.m);return {...e,codigo:MARCA.prefixo+'-EX'+(i+1),exemplo:1,inicio:x.toISOString(),dia:fd(x),hora:hm(e.h*60+e.m)};});
+let fCasa='todas',fStatus='todas';
+const todas=()=>[...Reservas.todas(),...exemplos].sort((a,b)=>new Date(a.inicio)-new Date(b.inicio));
+function muda(c,s){if(c.includes('-EX')){exemplos.find(x=>x.codigo===c).status=s;}else Reservas.muda(c,{status:s});pinta();}
+function pinta(){
+ const l=todas().filter(x=>fCasa==='todas'||x.casa===fCasa);
+ document.getElementById('hoje').textContent='Hoje é '+new Date().toLocaleDateString('pt-BR',{timeZone:'America/Fortaleza',weekday:'long',day:'numeric',month:'long'});
+ const at=l.filter(x=>x.status!=='cancelada'),ag=at.filter(x=>x.status==='aguardando').length;
+ document.getElementById('numeros').innerHTML=[[ag,'para confirmar',ag?'alerta':''],[at.length,'reservas ativas',''],[at.reduce((s,x)=>s+Number(x.pessoas),0),'pessoas esperadas',''],[Reservas.todas().length,'feitas pelo site agora','']].map(([n,t,c])=>`<div class="${c}"><b>${n}</b><span>${t}</span></div>`).join('');
+ document.getElementById('f-casa').innerHTML=[['todas','Todas as casas'],...MARCA.unidades.map(u=>[u.id,u.nome])].map(([k,n])=>`<button type="button" data-c="${k}" aria-pressed="${fCasa===k}">${n}</button>`).join('');
+ const vis=l.filter(x=>fStatus==='todas'||x.status===fStatus);
+ document.getElementById('lista').innerHTML=vis.length?vis.map(x=>{const det=[x.pessoas+' pessoas',x.ocasiao,...x.pedidos,x.obs?`“${x.obs}”`:''].filter(Boolean).join(' · ');const u=unidade(x.casa);
+  return `<div class="ficha"><div class="quando"><b>${x.hora}</b><span>${x.dia}</span><br><span class="casa">${u?u.nome:''}</span></div>
+  <div class="quem"><b>${x.nome}</b><small>${x.zap}</small>${x.exemplo?'<span class="exemplo">exemplo</span>':''}<div class="det">${det}</div>
+  ${x.status==='aguardando'&&x.motivos.length?`<div class="triagem">Conferir antes de confirmar: ${x.motivos.join(', ')}</div>`:''}<div class="cod">${x.codigo}</div></div>
+  <div class="lado"><div class="estado ${x.status}">${{aguardando:'Para confirmar',confirmada:'Confirmada',cancelada:'Cancelada'}[x.status]}</div><div class="acoes">
+  ${x.status==='aguardando'?`<button type="button" class="sim" data-r="${x.codigo}" data-s="confirmada">Confirmar</button>`:''}${x.status!=='cancelada'?`<button type="button" data-r="${x.codigo}" data-s="cancelada">Cancelar</button>`:''}
+  <a href="https://wa.me/55${x.zap.replace(/\D/g,'').replace(/^55/,'')}" target="_blank" rel="noopener">WhatsApp</a></div></div></div>`;}).join(''):`<p class="vazio">Nada aqui. <a href="../site/reservar/">Fazer uma reserva pelo site</a> para ver como ela chega.</p>`;
+}
+document.getElementById('lista').addEventListener('click',e=>{const b=e.target.closest('button[data-r]');if(b)muda(b.dataset.r,b.dataset.s);});
+document.getElementById('f-casa').addEventListener('click',e=>{const b=e.target.closest('button');if(b){fCasa=b.dataset.c;pinta();}});
+document.getElementById('f-status').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fStatus=b.dataset.f;document.querySelectorAll('#f-status button').forEach(x=>x.setAttribute('aria-pressed',x===b));pinta();});
+addEventListener('storage',pinta);
+const lg=document.getElementById('logo');lg.src=MARCA.logo;lg.alt=MARCA.nome;
+pinta();
+</script>
+</body>
+</html>

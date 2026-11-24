@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Santa Grelha, grelhados premium em Fortaleza desde 2000. Duas casas: Meireles e Iguatemi.">
+<title>Santa Grelha · protótipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Santa Grelha: branco de toalha, tinta escura e o vermelho do monograma SG. Bodoni (o SG é Didone) e Raleway (a do site deles). */
+:root{--fundo:#FBFAF8;--fundo-2:#F1ECE8;--tinta:#1B1616;--tinta-2:#5E5555;--tinta-3:#9C9292;--sg:#C4161C;--sg-escuro:#8E0E13;--regra:#DDD5D0;
+  --serif:'Bodoni Moda',Didot,'Bodoni 72',serif;--sans:'Raleway',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--fundo);color:var(--tinta);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sg);outline-offset:3px}
+.demo{background:var(--tinta);color:var(--fundo);font-size:13px;text-align:center;padding:7px 16px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.topo{display:flex;align-items:center;gap:28px;padding:14px 28px;max-width:1180px;margin:0 auto}
+.topo img{height:54px;filter:invert(1);mix-blend-mode:multiply}
+.topo nav{display:flex;gap:26px;margin-left:auto;font-size:15px;font-weight:500}
+.topo nav a{text-decoration:none;padding:10px 0}
+.topo nav a:hover{color:var(--sg)}
+.lang{background:none;border:1px solid var(--tinta);font:600 13px var(--sans);min-height:44px;min-width:50px;cursor:pointer;color:var(--tinta)}
+
+/* faixa + duas portas: a peça forte */
+.faixa{background:var(--sg);color:#fff;padding:18px 28px}
+.faixa .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding:0}
+.faixa h1{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,40px);line-height:1.15}
+.faixa h1 i{font-style:italic}
+.faixa span{font-size:15px;opacity:.9}
+.portas{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--tinta)}
+.porta{position:relative;min-height:min(74vh,660px);background:#2a2222 center/cover no-repeat;display:flex;align-items:flex-end}
+.porta .placa{background:var(--fundo);margin:0 0 0 0;padding:26px 28px 24px;width:min(460px,100%)}
+.porta h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.6vw,64px);line-height:1}
+.porta .end{font-size:15px;color:var(--tinta-2);margin:8px 0 12px}
+.porta .agora{display:flex;align-items:center;gap:10px;font-weight:500;font-size:16px}
+.porta .agora i{width:10px;height:10px;border-radius:50%;background:var(--sg);flex:none}
+.porta .agora.off i{background:var(--tinta-3)}
+.porta .trip{font-size:14px;color:var(--tinta-2);margin-top:4px}
+.porta .trip b{color:var(--sg);font-weight:600}
+.porta a.ir{display:flex;justify-content:space-between;align-items:center;margin-top:18px;background:var(--sg);color:#fff;text-decoration:none;min-height:56px;padding:0 20px;font-weight:600;font-size:16px}
+.porta a.ir:hover{background:var(--sg-escuro)}
+
+section{padding:96px 0}
+.cab h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.4vw,58px);line-height:1.08}
+.cab p{color:var(--tinta-2);max-width:60ch;margin-top:12px}
+
+/* cardápio */
+.indice{display:flex;flex-wrap:wrap;gap:4px 24px;margin:34px 0 0;padding:14px 0;border-top:2px solid var(--tinta);border-bottom:1px solid var(--regra);position:sticky;top:0;background:var(--fundo);z-index:5;font-weight:500;font-size:15px}
+.indice a{text-decoration:none;padding:6px 0}
+.indice a:hover{color:var(--sg)}
+.siglas{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px;font-size:15px;color:var(--tinta-2)}
+.siglas b{font-weight:600;color:var(--tinta)}
+.sigla{display:inline-block;font:600 11px var(--sans);letter-spacing:.04em;border:1.5px solid var(--sg);color:var(--sg);padding:0 5px;line-height:18px;margin-left:6px;vertical-align:2px}
+.grupo{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--regra)}
+.grupo h3{font-family:var(--serif);font-weight:400;font-style:italic;font-size:32px;line-height:1.1;color:var(--sg)}
+.grupo .nota{font-size:14px;color:var(--tinta-2);margin-top:10px;max-width:28ch}
+.itens{columns:2 300px;column-gap:44px}
+.item{break-inside:avoid;padding:0 0 18px}
+.item .n{font-family:var(--serif);font-size:21px;line-height:1.25}
+.item .p{font-family:var(--serif);color:var(--sg);margin-left:8px;font-size:19px;white-space:nowrap}
+.item .d{font-size:15px;color:var(--tinta-2);line-height:1.5}
+.antes{display:none}
+body.revisao .antes{display:block;font-size:13px;color:var(--sg);text-decoration:line-through}
+body.revisao .item.sem-sigla .n{box-shadow:inset 0 -6px 0 rgba(196,22,28,.18)}
+body.revisao .grupo .nota{color:var(--sg)}
+
+/* eventos */
+.ev{background:var(--fundo-2)}
+.ev .grade{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:grid;gap:4px;font-size:15px;color:var(--tinta-2)}
+form .full{grid-column:1/-1}
+input,select,textarea{background:transparent;border:0;border-bottom:2px solid var(--tinta);color:var(--tinta);font:400 17px var(--sans);padding:10px 2px;min-height:48px;width:100%;border-radius:0}
+form button{grid-column:1/-1;background:var(--sg);color:#fff;border:0;font:600 17px var(--sans);min-height:56px;cursor:pointer;margin-top:8px}
+.previa{grid-column:1/-1;white-space:pre-line;font-size:15px;background:var(--fundo);padding:14px 16px;display:none}
+.previa.on{display:block}
+
+/* casas */
+.casas .grade{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:36px}
+.casas h3{font-family:var(--serif);font-weight:400;font-size:36px}
+.casas .end{color:var(--tinta-2);margin:4px 0 16px}
+.horas{list-style:none}
+.horas li{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--regra);font-variant-numeric:tabular-nums}
+.horas li.hoje{color:var(--sg);font-weight:600}
+.casas .links{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+.casas .links a{min-height:44px;display:inline-flex;align-items:center;text-underline-offset:5px;font-weight:500}
+
+footer{padding:40px 28px 120px;max-width:1180px;margin:0 auto;color:var(--tinta-2);font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:2px solid var(--tinta)}
+.ferr{position:fixed;left:16px;bottom:16px;z-index:30;display:flex;gap:8px}
+.ferr button{min-height:44px;padding:0 16px;background:var(--fundo);color:var(--tinta);border:2px solid var(--tinta);font:600 14px var(--sans);cursor:pointer}
+.ferr button[aria-pressed=true]{background:var(--tinta);color:var(--fundo)}
+
+@media (max-width:900px){
+  .topo nav{display:none}
+  .portas{grid-template-columns:1fr}
+  .porta{min-height:58vh}
+  .grupo{grid-template-columns:1fr;gap:14px}
+  .ev .grade,.casas .grade{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  section{padding:64px 0}
+  .wrap{padding:0 22px}
+  .indice{overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<div class="demo" data-t="demo">Protótipo feito pela Timeless para o Santa Grelha. Não é o site oficial da casa.</div>
+<div class="topo">
+  <img src="https://static.wixstatic.com/media/404bb8_81e786be002e46a6983a11a3dbeebdc5~mv2.png/v1/fill/w_600,h_440,al_c,q_85/sg.png" alt="Santa Grelha">
+  <nav aria-label="Seções">
+    <a href="#cardapio" data-t="n1">Cardápio</a>
+    <a href="#casas" data-t="n2">As casas</a>
+    <a href="#eventos" data-t="n3">Eventos</a>
+    <a href="reservar/" data-t="n4">Reservar</a>
+  </nav>
+  <button class="lang" type="button" id="lang">EN</button>
+</div>
+
+<div class="faixa"><div class="wrap">
+  <h1 data-t="h1">Duas casas, a mesma brasa.</h1>
+  <span data-t="desde">Grelhados premium em Fortaleza desde 2000</span>
+</div></div>
+<div class="portas" id="portas"></div>
+
+<main>
+  <section id="cardapio">
+    <div class="wrap">
+      <div class="cab">
+        <h2 data-t="cardT">O cardápio</h2>
+        <p data-t="cardL">Do cardápio digital da casa, com os preços de 24/11/2026. Na brasa sagrada desde a primeira casa da Tibúrcio Cavalcante.</p>
+        <div class="siglas"><span data-t="sigT">Siglas de alergênico que a casa usa:</span><span><b>LE</b>, <b>CO</b>, <b>CR</b></span><span data-t="sigL">A legenda entra quando a casa enviar. Hoje ela não aparece no cardápio.</span></div>
+      </div>
+      <div class="indice" id="indice"></div>
+      <div id="lista"></div>
+    </div>
+  </section>
+
+  <section class="ev" id="eventos">
+    <div class="wrap grade">
+      <div class="cab">
+        <h2 data-t="evT">Comemorar no Santa Grelha</h2>
+        <p data-t="evL">Aniversário, jantar de empresa ou confraternização, na varanda do Meireles ou no Iguatemi. O pedido chega pronto para a equipe da casa escolhida.</p>
+      </div>
+      <form id="form-ev" novalidate>
+        <label class="full"><span data-t="fCasa">Casa</span><select name="casa" id="ev-casa"></select></label>
+        <label><span data-t="fNome">Seu nome</span><input name="nome" autocomplete="name"></label>
+        <label><span data-t="fData">Data</span><input name="data" type="date"></label>
+        <label><span data-t="fPessoas">Pessoas</span><input name="pessoas" type="number" min="9" inputmode="numeric"></label>
+        <label><span data-t="fTipo">Ocasião</span><select name="tipo"><option>Aniversário</option><option>Empresa</option><option>Casamento</option><option>Outra</option></select></label>
+        <label class="full"><span data-t="fObs">Algo mais?</span><textarea name="obs" rows="2"></textarea></label>
+        <button type="submit" data-t="fEnviar">Montar o pedido</button>
+        <div class="previa" id="previa" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="casas" id="casas">
+    <div class="wrap">
+      <div class="cab"><h2 data-t="casasT">As casas</h2><p data-t="casasL">Horário de cada uma, igual no site, no Google, no Instagram e no Tripadvisor.</p></div>
+      <div class="grade" id="lista-casas"></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <span>Santa Grelha, do Grupo Social Clube</span>
+  <span><a href="links/">Link da bio</a> &nbsp; <a href="../painel/" data-t="painelL">Painel da equipe</a></span>
+  <span data-t="rodape">Protótipo da Timeless. Fotos do site do Grupo Social Clube; horários do Tripadvisor em 24/11/2026.</span>
+</footer>
+<div class="ferr"><button type="button" id="b-revisao" aria-pressed="false">Ver o que corrigimos</button></div>
+
+<script src="marca.js"></script>
+<script src="comum.js"></script>
+<script src="cardapio.js"></script>
+<script>
+const EN={demo:'Prototype made by Timeless for Santa Grelha. Not the restaurant’s official website.',n1:'Menu',n2:'Our houses',n3:'Events',n4:'Book',
+ h1:'Two houses, one fire.',desde:'Premium grills in Fortaleza since 2000',cardT:'The menu',cardL:'From the restaurant’s digital menu, prices as of 24 Nov 2026. Cooked over the same fire since the first house on Tibúrcio Cavalcante.',
+ sigT:'Allergen codes the restaurant uses:',sigL:'The legend will be added when the restaurant sends it. Today it does not appear on the menu.',
+ evT:'Celebrate at Santa Grelha',evL:'Birthdays, team dinners and celebrations, on the Meireles terrace or at Iguatemi. The request reaches the team of the house you choose.',
+ fCasa:'House',fNome:'Your name',fData:'Date',fPessoas:'Guests',fTipo:'Occasion',fObs:'Anything else?',fEnviar:'Build the request',
+ casasT:'Our houses',casasL:'Each one’s hours, the same on the website, Google, Instagram and Tripadvisor.',painelL:'Team panel',
+ rodape:'Timeless prototype. Photos from the Grupo Social Clube website; hours from Tripadvisor, 24 Nov 2026.'};
+const PT={};document.querySelectorAll('[data-t]').forEach(e=>PT[e.dataset.t]=e.innerHTML);
+const brl=n=>'R$ '+n.toLocaleString('pt-BR');
+
+function portas(){
+  document.getElementById('portas').innerHTML=MARCA.unidades.map(u=>{
+    const s=estadoUnidade(u), on=s.k==='aberta';
+    const txt=on?L(`Aberta agora, até ${hm(s.ate)}`,`Open now, until ${hm(s.ate)}`):s.k==='fechada'?L(`Fechada agora. Abre amanhã às ${hm(s.abre)}`,`Closed now. Opens tomorrow at ${hm(s.abre)}`):L(`Abre hoje às ${hm(s.abre)}`,`Opens today at ${hm(s.abre)}`);
+    return `<div class="porta" style="background-image:url(${u.foto})" role="group" aria-label="${u.nome}">
+      <div class="placa"><h2>${u.nome}</h2><div class="end">${u.end}</div>
+      <div class="agora ${on?'':'off'}"><i aria-hidden="true"></i>${txt}</div>
+      <div class="trip">Tripadvisor <b>${u.trip[0]}</b>, ${L(u.trip[1]+' avaliações',u.trip[1].replace('.',',')+' reviews')}, ${L(u.trip[2],u.trip[2].replace('nº','#').replace('de','of').replace('em','in'))}</div>
+      <a class="ir" href="reservar/?casa=${u.id}" data-evt="Reservar ${u.nome}">${L('Reservar no '+u.nome,'Book at '+u.nome)}</a></div></div>`;}).join('');
+}
+function cardapio(){
+  document.getElementById('indice').innerHTML=CARDAPIO.map((g,k)=>`<a href="#g${k}">${lang==='en'?g.en:g.cat}</a>`).join('');
+  document.getElementById('lista').innerHTML=CARDAPIO.map((g,k)=>`<div class="grupo" id="g${k}"><div><h3>${lang==='en'?g.en:g.cat}</h3>${g.nota?`<p class="nota">${lang==='en'?'The restaurant does not yet state the weight or how many people each cut serves.':g.nota}</p>`:''}</div>
+    <div class="itens">${g.itens.map(i=>`<div class="item ${i.c.length?'':'sem-sigla'}"><div><span class="n">${lang==='en'?i.en[0]:i.n}</span><span class="p">${brl(i.p)}</span>${i.c.map(c=>`<span class="sigla" title="${L('sigla de alergênico','allergen code')}">${c}</span>`).join('')}</div>
+    <div class="d">${lang==='en'?i.en[1]:i.d}</div>${i.fix?`<div class="antes">${L('antes','before')}: ${i.fix}</div>`:''}</div>`).join('')}</div></div>`).join('');
+}
+function casas(){
+  const {d}=agoraFortaleza();
+  document.getElementById('lista-casas').innerHTML=MARCA.unidades.map(u=>`<div><h3>${u.nome}</h3><p class="end">${u.end}</p>
+    <ul class="horas">${[0,1,2,3,4,5,6].map(k=>`<li class="${k===d?'hoje':''}"><span>${lang==='en'?DAYS[k]:DIAS[k][0].toUpperCase()+DIAS[k].slice(1)}${k===d?L(' (hoje)',' (today)'):''}</span><span>${u.hor[k].map(([a,b])=>hm(a)+L(' às ','–')+hm(b)).join(', ')}</span></li>`).join('')}</ul>
+    <div class="links"><a href="${u.mapa}" target="_blank" rel="noopener">${L('Como chegar','Directions')}</a><a href="reservar/?casa=${u.id}">${L('Reservar','Book')}</a></div></div>`).join('');
+  document.getElementById('ev-casa').innerHTML=MARCA.unidades.map(u=>`<option value="${u.id}">${u.nome}</option>`).join('');
+}
+function tudo(){portas();cardapio();casas();}
+function aplicaLang(){document.getElementById('lang').textContent=lang==='en'?'PT':'EN';document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  document.querySelectorAll('[data-t]').forEach(x=>{const v=lang==='en'?EN[x.dataset.t]:PT[x.dataset.t];if(v)x.innerHTML=v;});tudo();}
+document.getElementById('lang').addEventListener('click',()=>{setLang(lang==='en'?'pt':'en');aplicaLang();});
+document.getElementById('form-ev').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target),u=unidade(f.get('casa'));
+  const data=f.get('data')?new Date(f.get('data')+'T12:00').toLocaleDateString('pt-BR'):'(data)';
+  const msg=`Olá! Quero fazer um evento no Santa Grelha ${u.nome}.\nNome: ${f.get('nome')||'(nome)'}\nData: ${data}\nPessoas: ${f.get('pessoas')||'(nº)'}\nOcasião: ${f.get('tipo')}${f.get('obs')?'\nObs.: '+f.get('obs'):''}`;
+  const p=document.getElementById('previa');p.classList.add('on');p.textContent=L(`A equipe do ${u.nome} receberia esta mensagem no WhatsApp. No site publicado, o botão abre a conversa direto.\n\n`,`The ${u.nome} team would get this message on WhatsApp. On the live site, the button opens the chat.\n\n`)+msg;});
+const bR=document.getElementById('b-revisao');bR.addEventListener('click',()=>{const on=document.body.classList.toggle('revisao');bR.setAttribute('aria-pressed',on);});
+aplicaLang();
+setInterval(portas,60000);
+</script>
+</body>
+</html>
